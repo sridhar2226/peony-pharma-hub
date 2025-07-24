@@ -8,35 +8,35 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Pharmaceutical color palette - medical blues and teals */
+    /* Pharmaceutical color palette - medical greens */
     --background: 0 0% 100%;
-    --foreground: 215 25% 27%;
+    --foreground: 156 25% 27%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 27%;
+    --card-foreground: 156 25% 27%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 27%;
+    --popover-foreground: 156 25% 27%;
 
-    --primary: 214 88% 27%; /* Medical blue */
+    --primary: 142 72% 29%; /* Medical green */
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 214 88% 35%;
+    --primary-glow: 142 72% 35%;
 
-    --secondary: 188 94% 37%; /* Medical teal */
+    --secondary: 120 60% 50%; /* Light green */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 120 40% 96%;
+    --muted-foreground: 156 16% 47%;
 
-    --accent: 188 94% 37%; /* Teal accent */
+    --accent: 120 60% 50%; /* Green accent */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 214 88% 27%;
+    --border: 142 32% 91%;
+    --input: 142 32% 91%;
+    --ring: 142 72% 29%;
 
     /* Medical gradient system */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));

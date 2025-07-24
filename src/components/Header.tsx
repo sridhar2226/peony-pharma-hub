@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, ShoppingCart } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,45 +74,60 @@ const Header = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Menu Sheet */}
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="sm" className="lg:hidden">
+                <Menu className="w-6 h-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-80">
+              <div className="py-6">
+                {/* Logo in Mobile Menu */}
+                <Link to="/" className="flex items-center space-x-2 mb-8" onClick={() => setIsOpen(false)}>
+                  <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">P</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-bold text-lg text-primary">Peony</span>
+                    <span className="text-xs text-muted-foreground -mt-1">Life Sciences</span>
+                  </div>
+                </Link>
+
+                {/* Navigation Links */}
+                <nav className="space-y-4 mb-8">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className={`block py-3 px-4 rounded-lg font-medium transition-colors duration-200 ${
+                        isActive(item.path) 
+                          ? "bg-primary text-white" 
+                          : "text-foreground hover:bg-muted"
+                      }`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </nav>
+
+                {/* CTA Buttons */}
+                <div className="space-y-3">
+                  <Button variant="ghost" className="w-full justify-start">
+                    <Phone className="w-4 h-4 mr-2" />
+                    Contact Us
+                  </Button>
+                  <Button variant="medical" className="w-full">
+                    <ShoppingCart className="w-4 h-4 mr-2" />
+                    Order Online
+                  </Button>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-t shadow-card">
-            <nav className="px-4 py-6 space-y-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`block py-2 font-medium transition-colors duration-200 ${
-                    isActive(item.path) ? "text-primary" : "text-foreground hover:text-primary"
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="pt-4 space-y-3">
-                <Button variant="ghost" className="w-full justify-start">
-                  <Phone className="w-4 h-4 mr-2" />
-                  Contact Us
-                </Button>
-                <Button variant="medical" className="w-full">
-                  <ShoppingCart className="w-4 h-4 mr-2" />
-                  Order Online
-                </Button>
-              </div>
-            </nav>
-          </div>
-        )}
       </div>
     </header>
   );
