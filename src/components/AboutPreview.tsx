@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Target, Eye, Heart, Users, Building, Award } from "lucide-react";
+import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 
 const AboutPreview = () => {
+  const [ref, isVisible] = useScrollAnimation();
+  const [valuesRef, visibleValues] = useStaggeredAnimation(3);
+  const [achievementsRef, visibleAchievements] = useStaggeredAnimation(3);
+
   const values = [
     {
       icon: Target,
@@ -27,10 +32,10 @@ const AboutPreview = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-subtle">
+    <section ref={ref} className="py-20 bg-gradient-subtle">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             About Peony Life Sciences
           </h2>
@@ -41,9 +46,9 @@ const AboutPreview = () => {
         </div>
 
         {/* Mission, Vision, Values */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div ref={valuesRef} className="grid md:grid-cols-3 gap-8 mb-16">
           {values.map((item, index) => (
-            <div key={index} className="group bg-white rounded-xl p-8 shadow-card hover:shadow-medical transition-all duration-300 transform hover:scale-105">
+            <div key={index} className={`group bg-gradient-card rounded-xl p-8 shadow-card hover:shadow-luxury transition-all duration-500 transform hover:scale-105 ${visibleValues.includes(index) ? 'animate-scale-in' : 'opacity-0'}`}>
               <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mb-6 group-hover:shadow-glow transition-all duration-300">
                 <item.icon className="w-8 h-8 text-white" />
               </div>
@@ -54,11 +59,11 @@ const AboutPreview = () => {
         </div>
 
         {/* Achievements */}
-        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-card mb-12">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
+        <div className="bg-gradient-card rounded-2xl p-8 md:p-12 shadow-card mb-12">
+          <div ref={achievementsRef} className="grid md:grid-cols-3 gap-8 text-center">
             {achievements.map((achievement, index) => (
-              <div key={index} className="group">
-                <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-glow transition-all duration-300">
+              <div key={index} className={`group transition-all duration-500 ${visibleAchievements.includes(index) ? 'animate-fade-in-up' : 'opacity-0'}`}>
+                <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-glow group-hover:animate-pulse-glow transition-all duration-300">
                   <achievement.icon className="w-10 h-10 text-white" />
                 </div>
                 <div className="text-4xl font-bold text-primary mb-2">{achievement.number}</div>

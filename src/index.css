@@ -8,45 +8,50 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Pharmaceutical color palette - medical greens */
+    /* Luxury pharmaceutical palette - sophisticated emerald greens */
     --background: 0 0% 100%;
-    --foreground: 156 25% 27%;
+    --foreground: 158 31% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 156 25% 27%;
+    --card-foreground: 158 31% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 156 25% 27%;
+    --popover-foreground: 158 31% 15%;
 
-    --primary: 142 72% 29%; /* Medical green */
+    --primary: 158 64% 35%; /* Luxury emerald */
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 142 72% 35%;
+    --primary-glow: 158 64% 45%;
+    --primary-light: 158 45% 65%;
+    --primary-dark: 158 84% 25%;
 
-    --secondary: 120 60% 50%; /* Light green */
+    --secondary: 145 63% 42%; /* Deep forest green */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 120 40% 96%;
-    --muted-foreground: 156 16% 47%;
+    --muted: 152 30% 96%;
+    --muted-foreground: 158 20% 45%;
 
-    --accent: 120 60% 50%; /* Green accent */
+    --accent: 164 76% 39%; /* Teal accent */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 142 32% 91%;
-    --input: 142 32% 91%;
-    --ring: 142 72% 29%;
+    --border: 152 25% 90%;
+    --input: 152 25% 92%;
+    --ring: 158 64% 35%;
 
-    /* Medical gradient system */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(210 40% 98%));
+    /* Luxury gradient system */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary-dark)), hsl(var(--primary)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary-dark)) 0%, hsl(var(--primary-light)) 100%);
+    --gradient-luxury: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--secondary)) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(152 20% 98%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(152 15% 98%) 100%);
     
-    /* Medical shadows with brand colors */
-    --shadow-medical: 0 10px 30px -10px hsl(var(--primary) / 0.15);
-    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.2);
-    --shadow-card: 0 4px 20px -4px hsl(var(--primary) / 0.1);
+    /* Luxury shadows with emerald glow */
+    --shadow-luxury: 0 25px 50px -12px hsl(var(--primary) / 0.25);
+    --shadow-glow: 0 0 60px hsl(var(--primary-glow) / 0.3);
+    --shadow-card: 0 8px 30px -6px hsl(var(--primary) / 0.15);
+    --shadow-float: 0 20px 40px -8px hsl(var(--primary) / 0.2);
     
     /* Professional transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

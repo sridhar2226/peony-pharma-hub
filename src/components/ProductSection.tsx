@@ -1,8 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Pill, Syringe, Stethoscope, Shield } from "lucide-react";
+import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 import pharmaceuticalProducts from "@/assets/pharmaceutical-products.jpg";
 
 const ProductSection = () => {
+  const [ref, isVisible] = useScrollAnimation();
+  const [categoriesRef, visibleCategories] = useStaggeredAnimation(3);
+
   const productCategories = [
     {
       icon: Pill,
@@ -52,10 +56,10 @@ const ProductSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section ref={ref} className="py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Our Product Portfolio
           </h2>
@@ -66,9 +70,9 @@ const ProductSection = () => {
         </div>
 
         {/* Product Categories */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div ref={categoriesRef} className="grid md:grid-cols-3 gap-8 mb-16">
           {productCategories.map((category, index) => (
-            <div key={index} className="group bg-white rounded-xl p-8 shadow-card hover:shadow-medical transition-all duration-300 transform hover:scale-105">
+            <div key={index} className={`group bg-gradient-card rounded-xl p-8 shadow-card hover:shadow-luxury transition-all duration-500 transform hover:scale-105 ${visibleCategories.includes(index) ? 'animate-scale-in' : 'opacity-0'}`}>
               <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mb-6 group-hover:shadow-glow transition-all duration-300">
                 <category.icon className="w-8 h-8 text-white" />
               </div>
