@@ -8,6 +8,7 @@ import Loader from "@/components/Loader";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Products from "./pages/Products";
+import Shop from "./pages/Shop";
 import Research from "./pages/Research";
 import Quality from "./pages/Quality";
 import Contact from "./pages/Contact";
@@ -41,6 +42,7 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/shop" element={<Shop />} />
             <Route path="/research" element={<Research />} />
             <Route path="/quality" element={<Quality />} />
             <Route path="/contact" element={<Contact />} />
