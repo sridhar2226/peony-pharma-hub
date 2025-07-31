@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, ShoppingCart } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,6 +66,7 @@ const Header = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
+            <ThemeToggle />
             <Button variant="ghost" size="sm" className="text-primary">
               <Phone className="w-4 h-4 mr-2" />
               Contact Us
@@ -115,6 +117,9 @@ const Header = () => {
 
                 {/* CTA Buttons */}
                 <div className="space-y-3">
+                  <div className="flex justify-start">
+                    <ThemeToggle />
+                  </div>
                   <Button variant="ghost" className="w-full justify-start">
                     <Phone className="w-4 h-4 mr-2" />
                     Contact Us

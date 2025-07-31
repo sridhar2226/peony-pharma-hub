@@ -144,9 +144,9 @@ const ShopSection = () => {
                         variant="medical" 
                         size="sm"
                         className="flex-1 flex items-center gap-2"
+                        onClick={() => window.open(`/product/${product.id}`, '_blank')}
                       >
-                        <ShoppingCart className="w-4 h-4" />
-                        Add to Cart
+                        Buy Now
                       </Button>
                     </div>
                   </div>
