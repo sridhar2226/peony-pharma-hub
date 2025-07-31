@@ -211,6 +211,7 @@ const Products = () => {
                       size="sm"
                       disabled={!product.inStock}
                       className="flex items-center gap-2"
+                      onClick={() => window.open('https://preview--product-lane-shop.lovable.app/', '_blank')}
                     >
                       <ShoppingCart className="w-4 h-4" />
                       {product.inStock ? "Add to Cart" : "Unavailable"}

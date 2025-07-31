@@ -25,6 +25,7 @@ const Header = () => {
     { label: "Shop", path: "/shop" },
     { label: "R&D", path: "/research" },
     { label: "Quality", path: "/quality" },
+    { label: "Blog", path: "/blog" },
     { label: "Contact", path: "/contact" },
   ];
 
@@ -71,7 +72,7 @@ const Header = () => {
               <Phone className="w-4 h-4 mr-2" />
               Contact Us
             </Button>
-            <Button variant="medical" size="sm">
+            <Button variant="medical" size="sm" onClick={() => window.open('https://preview--product-lane-shop.lovable.app/', '_blank')}>
               <ShoppingCart className="w-4 h-4 mr-2" />
               Order Online
             </Button>
@@ -124,7 +125,7 @@ const Header = () => {
                     <Phone className="w-4 h-4 mr-2" />
                     Contact Us
                   </Button>
-                  <Button variant="medical" className="w-full">
+                  <Button variant="medical" className="w-full" onClick={() => window.open('https://preview--product-lane-shop.lovable.app/', '_blank')}>
                     <ShoppingCart className="w-4 h-4 mr-2" />
                     Order Online
                   </Button>
