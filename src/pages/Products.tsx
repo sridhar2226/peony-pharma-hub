@@ -113,40 +113,50 @@ const Products = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-hero">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Our Products
-          </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
-            More than 70+ pharmaceutical products & veterinary medicines available. 
-            Quality assured and internationally certified.
-          </p>
-          <div className="max-w-md mx-auto relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70 w-5 h-5" />
-            <Input
-              type="text"
-              placeholder="Search products..."
-              className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/70"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+      <section className="pt-24 pb-16 bg-gradient-hero relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-accent/90"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              Premium Products
+            </h1>
+            <p className="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto mb-12 leading-relaxed">
+              More than 70+ pharmaceutical products & veterinary medicines available. 
+              Quality assured and internationally certified.
+            </p>
+            <div className="max-w-md mx-auto relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/80 w-5 h-5" />
+              <Input
+                type="text"
+                placeholder="Search premium products..."
+                className="pl-12 h-14 bg-white/15 border-white/30 text-white placeholder:text-white/80 backdrop-blur-sm rounded-xl text-lg"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
           </div>
         </div>
+        {/* Decorative elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+        <div className="absolute bottom-20 right-10 w-32 h-32 bg-accent/20 rounded-full blur-2xl"></div>
       </section>
 
       {/* Category Filter */}
-      <section className="py-8 bg-white border-b">
+      <section className="py-12 bg-background border-b border-border">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-foreground mb-2">Browse by Category</h2>
+            <p className="text-muted-foreground">Select a category to filter our extensive product range</p>
+          </div>
           <div className="flex flex-wrap gap-4 justify-center">
             {categories.map((category) => (
               <Button
                 key={category.id}
                 variant={selectedCategory === category.id ? "medical" : "outline"}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 h-12 px-6 text-base"
                 onClick={() => setSelectedCategory(category.id)}
               >
-                <category.icon className="w-4 h-4" />
+                <category.icon className="w-5 h-5" />
                 {category.label}
               </Button>
             ))}
