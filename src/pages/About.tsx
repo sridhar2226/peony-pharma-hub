@@ -82,9 +82,9 @@ const About = () => {
                 secure inventory management and 24/7 customer service support to meet all your 
                 pharmaceutical needs.
               </p>
-              <Button variant="medical" size="lg">
+              {/* <Button variant="medical" size="lg">
                 Download Our Mobile App
-              </Button>
+              </Button> */}
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-gradient-subtle p-6 rounded-xl">

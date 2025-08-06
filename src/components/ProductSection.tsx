@@ -2,10 +2,15 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Pill, Syringe, Stethoscope, Shield } from "lucide-react";
 import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 import pharmaceuticalProducts from "@/assets/pharmaceutical-products.jpg";
+import { useNavigate } from "react-router-dom";
 
 const ProductSection = () => {
   const [ref, isVisible] = useScrollAnimation();
   const [categoriesRef, visibleCategories] = useStaggeredAnimation(3);
+  const navigate = useNavigate();
+  const toNavigateProducts = () => {
+    navigate('/products');
+  }
 
   const productCategories = [
     {
@@ -64,7 +69,7 @@ const ProductSection = () => {
             Our Product Portfolio
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive range of pharmaceutical products meeting global quality standards, 
+            Comprehensive range of pharmaceutical products meeting global quality standards,
             from routine medications to specialized critical care solutions.
           </p>
         </div>
@@ -91,7 +96,7 @@ const ProductSection = () => {
         </div>
 
         {/* Featured Products */}
-        <div className="bg-gradient-subtle rounded-2xl p-8 md:p-12 mb-12">
+        {/* <div className="bg-gradient-subtle rounded-2xl p-8 md:p-12 mb-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h3 className="text-3xl font-bold text-foreground mb-6">Featured Products</h3>
@@ -132,10 +137,10 @@ const ProductSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-xl"></div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* CTA Section */}
-        <div className="text-center">
+        {/* <div className="text-center">
           <div className="bg-primary rounded-2xl p-8 md:p-12 text-white">
             <h3 className="text-3xl font-bold mb-4">Ready to Order?</h3>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
@@ -143,7 +148,7 @@ const ProductSection = () => {
               competitive pricing, and seamless ordering process.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="secondary" size="lg" className="text-lg px-8 py-4 group">
+              <Button variant="secondary" size="lg" className="text-lg px-8 py-4 group" onClick={toNavigateProducts}>
                 Browse All Products
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -151,6 +156,62 @@ const ProductSection = () => {
                 Start Ordering
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
+            </div>
+          </div>
+        </div> */}
+      </div>
+      <div className="container mx-auto px-4">
+        {/* Section Header */}
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Achievers 2023-2024
+          </h2>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 py-10 space-y-8">
+          {/* Top Section */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Text */}
+            <div className="flex flex-col justify-between">
+              <p className="text-lg leading-relaxed">
+                In recognition of outstanding performance, we organized an exclusive
+                trip to Thailand for our top achievers who excelled in medicine stock
+                sales. This trip was a way to celebrate their hard work and dedication.
+                It was a great mix of fun and relaxation, giving our achievers a chance
+                to explore Thailand and enjoy time with their fellow achievers.
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-3">
+            {[
+              "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=148,h=148,fit=crop/Y4LJlKpEGLt7yeJM/img_20240924_125752546_ae-1-Y4LVlgxkaKHOL0EV.jpg",
+              "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=148,h=148,fit=crop/Y4LJlKpEGLt7yeJM/img_20240925_104818388_hdr_ae-A85wDy4gyyHyq5D8.jpg",
+              "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=148,h=148,fit=crop/Y4LJlKpEGLt7yeJM/img_20240923_183833630_hdr_ae-A85wDy4qleu4XeN4.jpg",
+              "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=148,h=148,fit=crop/Y4LJlKpEGLt7yeJM/img_20240923_133241825_ae-A3QwB4JZ8EhEWx4j.jpg",
+              "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=148,h=148,fit=crop/Y4LJlKpEGLt7yeJM/img_20240921_115528214_hdr_ae-mp8vMN9Bb9u0KXQq.jpg",
+              "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=148,h=148,fit=crop/Y4LJlKpEGLt7yeJM/img_20240925_110336964_hdr_ae-mP4nZLQZ4bCxlwkD.jpg",
+              "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=148,h=148,fit=crop/Y4LJlKpEGLt7yeJM/img_20240921_115544950_ae-YKb6Pxr2GRsVw7n8.jpg",
+              "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=148,h=148,fit=crop/Y4LJlKpEGLt7yeJM/img_20240923_185743459_hdr_ae-mk3zlMGlBDTxk71E.jpg",
+            ].map((src, idx) => (
+              <img
+                key={idx}
+                src={src}
+                alt={`Thailand trip ${idx + 1}`}
+                className="rounded-lg w-full h-24 sm:h-28 md:h-32 object-cover"
+              />
+            ))}
+          </div>
+            </div>
+
+            {/* Right: Two stacked big images */}
+            <div className="flex flex-col gap-4">
+              <img
+                src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=480,h=359,fit=crop/Y4LJlKpEGLt7yeJM/img_20240923_200857326-YBgrExeZ2LhBBXER.jpg"
+                alt="Group celebration"
+                className="rounded-lg w-full h-64 md:h-80 object-cover"
+              />
+              <img
+                src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=480,h=320,fit=crop/Y4LJlKpEGLt7yeJM/.7-YD067PMz5oFBRO3O.jpg"
+                alt="Night view group"
+                className="rounded-lg w-full h-64 md:h-80 object-cover"
+              />
             </div>
           </div>
         </div>

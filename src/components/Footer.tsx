@@ -7,10 +7,10 @@ const Footer = () => {
   const quickLinks = [
     { label: "About Us", path: "/about" },
     { label: "Products", path: "/products" },
-    { label: "Research", path: "/research" },
-    { label: "Quality", path: "/quality" },
-    { label: "Contact", path: "/contact" },
-    { label: "Careers", path: "/careers" }
+    // { label: "Research", path: "/research" },
+    // { label: "Quality", path: "/quality" },
+    { label: "Contact", path: "/contact" }
+    // { label: "Careers", path: "/careers" }
   ];
 
   const productCategories = [
@@ -76,15 +76,15 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-white/90 mb-6 leading-relaxed">
-              Leading pharmaceutical innovation with world-class quality standards, 
-              delivering life-saving medicines to patients globally through cutting-edge 
+              Leading pharmaceutical innovation with world-class quality standards,
+              delivering life-saving medicines to patients globally through cutting-edge
               research and manufacturing excellence.
             </p>
-            <div className="space-y-3">
+            <div className="space-y-3 mb-6">
               <div className="flex items-center">
                 <MapPin className="w-5 h-5 text-secondary mr-3" />
                 <span className="text-white/90">
-                  123 Pharma Plaza, Medical District, NY 10001, USA
+                  20J NGGO COLONY TAMIL NADU 614601
                 </span>
               </div>
               <div className="flex items-center">
@@ -95,6 +95,20 @@ const Footer = () => {
                 <Mail className="w-5 h-5 text-secondary mr-3" />
                 <span className="text-white/90">info@peonypharma.com</span>
               </div>
+            </div>
+
+            {/* Map Embed */}
+            <div className="rounded-lg overflow-hidden shadow-lg">
+              <iframe
+                title="Company Location"
+                src="https://www.google.com/maps?q=20J,RV+NAGAR,+1ST+STREET+PATTUKKOTTAI+614601&output=embed"
+                width="100%"
+                height="200"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
 
@@ -147,7 +161,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-            
+
             {/* Social Links */}
             <div>
               <h5 className="font-semibold mb-4">Follow Us</h5>

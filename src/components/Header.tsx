@@ -4,6 +4,7 @@ import { Menu, X, Phone, ShoppingCart } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import companyLogo from "@/assets/LIFE SCIENCES.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,9 +23,9 @@ const Header = () => {
     { label: "Home", path: "/" },
     { label: "About", path: "/about" },
     { label: "Products", path: "/products" },
-    { label: "Shop", path: "/shop" },
-    { label: "R&D", path: "/research" },
-    { label: "Quality", path: "/quality" },
+    // { label: "Shop", path: "/shop" },
+    // { label: "R&D", path: "/research" },
+    // { label: "Quality", path: "/quality" },
     { label: "Blog", path: "/blog" },
     { label: "Contact", path: "/contact" },
   ];
@@ -32,15 +33,18 @@ const Header = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? "bg-background/95 backdrop-blur-md shadow-card border-b border-border" : "bg-background/90 backdrop-blur-sm"
-    }`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/95 backdrop-blur-md shadow-card border-b border-border" : "bg-background/90 backdrop-blur-sm"
+      }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">P</span>
+            <div style={{
+              width: "90px",
+              padding: "6px",
+              backgroundColor: "var(--company-logo_bg)",
+            }} className="company-logo rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-xl"><img src={companyLogo} /></span>
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-lg text-primary">Peony</span>
@@ -54,11 +58,10 @@ const Header = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`font-medium transition-colors duration-200 ${
-                  isActive(item.path)
-                    ? "text-primary border-b-2 border-primary"
-                    : "text-foreground hover:text-primary"
-                }`}
+                className={`font-medium transition-colors duration-200 ${isActive(item.path)
+                  ? "text-primary border-b-2 border-primary"
+                  : "text-foreground hover:text-primary"
+                  }`}
               >
                 {item.label}
               </Link>
@@ -104,11 +107,10 @@ const Header = () => {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className={`block py-3 px-4 rounded-lg font-medium transition-colors duration-200 ${
-                        isActive(item.path) 
-                          ? "bg-primary text-white" 
-                          : "text-foreground hover:bg-muted"
-                      }`}
+                      className={`block py-3 px-4 rounded-lg font-medium transition-colors duration-200 ${isActive(item.path)
+                        ? "bg-primary text-white"
+                        : "text-foreground hover:bg-muted"
+                        }`}
                       onClick={() => setIsOpen(false)}
                     >
                       {item.label}
@@ -135,8 +137,8 @@ const Header = () => {
           </Sheet>
         </div>
 
-      </div>
-    </header>
+      </div >
+    </header >
   );
 };
 

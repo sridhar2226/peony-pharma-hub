@@ -1,10 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Shield, Award, Globe } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-pharma-lab.jpg";
 
 const HeroSection = () => {
   const [ref, isVisible] = useScrollAnimation();
+  const navigate = useNavigate();
+  const toNavigateProducts =() => {
+    navigate('/products');
+  }
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -27,7 +32,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className={`relative z-10 container mx-auto px-4 text-center transition-all duration-1000 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+      <div className={`relative z-10 container mx-auto px-4 text-center transition-all duration-1000 pt-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
         <div className="max-w-4xl mx-auto">
           {/* Trust Badges */}
           <div className="flex justify-center items-center space-x-6 mb-8">
@@ -69,6 +74,7 @@ const HeroSection = () => {
               variant="hero" 
               size="lg" 
               className="text-lg px-8 py-4 min-w-[200px] group"
+              onClick={toNavigateProducts}
             >
               Explore Products
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -77,6 +83,7 @@ const HeroSection = () => {
               variant="secondary" 
               size="lg" 
               className="text-lg px-8 py-4 min-w-[200px] group"
+              onClick={() => window.open('https://preview--product-lane-shop.lovable.app/', '_blank')}
             >
               Order Now
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -84,14 +91,14 @@ const HeroSection = () => {
           </div>
 
           {/* Play Button for Company Video */}
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <button className="group flex items-center text-white/90 hover:text-white transition-colors">
               <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-4 group-hover:bg-white/30 transition-colors">
                 <Play className="w-6 h-6 ml-1" />
               </div>
               <span className="text-lg font-medium">Watch Our Story</span>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 

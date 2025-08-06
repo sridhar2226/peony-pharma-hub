@@ -12,6 +12,8 @@ All colors MUST be HSL.
     --background: 0 0% 100%;
     --foreground: 120 25% 15%;
 
+    --company-logo_bg: #fff
+
     --card: 0 0% 100%;
     --card-foreground: 120 25% 15%;
 
@@ -79,6 +81,8 @@ All colors MUST be HSL.
   .dark {
     --background: 15 15% 8%;
     --foreground: 0 0% 95%;
+
+    --company-logo_bg: #000;
 
     --card: 15 15% 10%;
     --card-foreground: 0 0% 95%;

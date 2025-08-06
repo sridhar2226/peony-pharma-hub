@@ -89,10 +89,10 @@ const ResearchQuality = () => {
                 ))}
               </div>
 
-              <Button variant="medical" size="lg" className="group">
+              {/* <Button variant="medical" size="lg" className="group">
                 Tour Our Facilities
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              </Button> */}
             </div>
             <div className="relative">
               <img
@@ -127,12 +127,12 @@ const ResearchQuality = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          {/* <div className="text-center mt-12">
             <Button variant="secondary" size="lg" className="group">
               View All Certifications
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

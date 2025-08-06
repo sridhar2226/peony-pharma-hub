@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+.company-logo {
+  width: 90px;
+  padding: 6px;
+  background-color: var(--company-logo_bg);
+}

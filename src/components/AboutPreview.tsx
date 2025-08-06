@@ -1,11 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Target, Eye, Heart, Users, Building, Award } from "lucide-react";
 import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
+import { useNavigate } from "react-router-dom";
 
 const AboutPreview = () => {
   const [ref, isVisible] = useScrollAnimation();
   const [valuesRef, visibleValues] = useStaggeredAnimation(3);
   const [achievementsRef, visibleAchievements] = useStaggeredAnimation(3);
+  const navigate = useNavigate();
+  const toNavigateAbout =() => {
+    navigate('/about');
+  }
 
   const values = [
     {
@@ -92,7 +97,7 @@ const AboutPreview = () => {
 
         {/* CTA */}
         <div className="text-center">
-          <Button variant="medical" size="lg" className="text-lg px-8 py-4 group">
+          <Button variant="medical" size="lg" className="text-lg px-8 py-4 group" onClick={toNavigateAbout}>
             Learn More About Us
             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
