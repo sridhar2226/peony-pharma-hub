@@ -4,12 +4,14 @@ import { Menu, X, Phone, ShoppingCart } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useNavigate } from "react-router-dom";
 import companyLogo from "@/assets/LIFE SCIENCES.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const naviagte = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +33,10 @@ const Header = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const navigateToContact = () => {
+    naviagte('/contact')
+  }
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/95 backdrop-blur-md shadow-card border-b border-border" : "bg-background/90 backdrop-blur-sm"
@@ -71,7 +77,7 @@ const Header = () => {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
             <ThemeToggle />
-            <Button variant="ghost" size="sm" className="text-primary">
+            <Button variant="ghost" size="sm" className="text-primary" onClick={navigateToContact}>
               <Phone className="w-4 h-4 mr-2" />
               Contact Us
             </Button>

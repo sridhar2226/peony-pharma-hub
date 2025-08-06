@@ -12,7 +12,7 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Headquarters",
-      details: ["123 Pharmaceutical Avenue", "Medical District", "Healthcare City, HC 12345"],
+      details: ["20J, NGGO COLONY, PATTUKKOTTAI, TAMIL NADU - 614601"],
       color: "text-primary"
     },
     {
@@ -49,14 +49,14 @@ const Contact = () => {
       description: "24/7 support for existing customers and product-related queries.",
       email: "support@peonylifesciences.com",
       phone: "+1 (555) 987-6543"
-    },
-    {
-      icon: Globe,
-      title: "International Sales",
-      description: "Global distribution, export queries, and international partnerships.",
-      email: "international@peonylifesciences.com",
-      phone: "+1 (555) 456-7890"
     }
+    // {
+    //   icon: Globe,
+    //   title: "International Sales",
+    //   description: "Global distribution, export queries, and international partnerships.",
+    //   email: "international@peonylifesciences.com",
+    //   phone: "+1 (555) 456-7890"
+    // }
   ];
 
   const globalOffices = [
@@ -225,7 +225,7 @@ const Contact = () => {
       </section>
 
       {/* Global Offices */}
-      <section className="py-16 bg-white">
+      {/* <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">Global Presence</h2>
@@ -261,7 +261,7 @@ const Contact = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-16 bg-primary">
