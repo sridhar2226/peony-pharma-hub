@@ -79,7 +79,7 @@ const AboutPreview = () => {
         </div>
 
         {/* USPs - Certifications */}
-        <div className="bg-primary rounded-2xl p-8 md:p-12 text-center mb-12">
+        {/* <div className="bg-primary rounded-2xl p-8 md:p-12 text-center mb-12">
           <h3 className="text-3xl font-bold text-white mb-8">Global Quality Standards</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
@@ -93,7 +93,7 @@ const AboutPreview = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* CTA */}
         <div className="text-center">

@@ -9,7 +9,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import Loader from "@/components/Loader";
 import Index from "./pages/Index";
 import About from "./pages/About";
-import Products from "./pages/Products";
+// import Products from "./pages/Products";
 import Shop from "./pages/Shop";
 import Research from "./pages/Research";
 import Quality from "./pages/Quality";
@@ -57,7 +57,7 @@ const App = () => {
             <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
-            <Route path="/products" element={<Products />} />
+            {/* <Route path="/products" element={<Products />} /> */}
             <Route path="/shop" element={<Shop />} />
             <Route path="/research" element={<Research />} />
             <Route path="/quality" element={<Quality />} />

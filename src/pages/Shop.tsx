@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ShopSection from "@/components/ShopSection";
+// import ShopSection from "@/components/ShopSection";
 
 const Shop = () => {
   return (
@@ -20,7 +20,7 @@ const Shop = () => {
         </div>
       </section>
 
-      <ShopSection />
+      {/* <ShopSection /> */}
       <Footer />
     </div>
   );

@@ -68,7 +68,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-foreground mb-6">
+              <h2 className="text-4xl font-bold text-black mb-6">
                 NOW YOUR HEALTH IS YOURS
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
@@ -106,7 +106,7 @@ const About = () => {
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Our Foundation</h2>
+            <h2 className="text-4xl font-bold text-black mb-4">Our Foundation</h2>
             <p className="text-xl text-muted-foreground">Built on strong principles and clear vision</p>
           </div>
           
@@ -116,7 +116,7 @@ const About = () => {
                 <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mb-6 group-hover:shadow-glow transition-all duration-300">
                   <item.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground mb-4">{item.title}</h3>
+                <h3 className="text-2xl font-bold text-black mb-4">{item.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">{item.description}</p>
               </div>
             ))}
@@ -128,7 +128,7 @@ const About = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Our Achievements</h2>
+            <h2 className="text-4xl font-bold text-black mb-4">Our Achievements</h2>
             <p className="text-xl text-muted-foreground">Numbers that reflect our commitment to excellence</p>
           </div>
           
@@ -150,7 +150,7 @@ const About = () => {
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Our Journey</h2>
+            <h2 className="text-4xl font-bold text-black mb-4">Our Journey</h2>
             <p className="text-xl text-muted-foreground">25+ years of pharmaceutical excellence</p>
           </div>
           
@@ -169,7 +169,7 @@ const About = () => {
       </section>
 
       {/* Certifications */}
-      <section className="py-16 bg-primary">
+      {/* <section className="py-16 bg-primary">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-8">Global Quality Standards</h2>
           <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto">
@@ -187,7 +187,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>

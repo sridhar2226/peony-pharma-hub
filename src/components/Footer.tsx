@@ -1,70 +1,111 @@
+import { useState } from "react"; // ✅ For handling email input & status messages
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MapPin, Phone, Mail, Send, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Send,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+} from "lucide-react";
 import { Link } from "react-router-dom";
+import emailjs from "@emailjs/browser"; // ✅ Import EmailJS to send emails
 
 const Footer = () => {
+  // State to store user email input
+  const [email, setEmail] = useState("");
+  // State to show subscription success/error message
+  const [status, setStatus] = useState("");
+
+  // Quick links data
   const quickLinks = [
     { label: "About Us", path: "/about" },
-    { label: "Products", path: "/products" },
-    // { label: "Research", path: "/research" },
-    // { label: "Quality", path: "/quality" },
-    { label: "Contact", path: "/contact" }
-    // { label: "Careers", path: "/careers" }
+    { label: "Contact", path: "/contact" },
   ];
 
-  const productCategories = [
-    { label: "Cardiovascular", path: "/products/cardiovascular" },
-    { label: "Diabetes Care", path: "/products/diabetes" },
-    { label: "Pain Management", path: "/products/pain" },
-    { label: "Antibiotics", path: "/products/antibiotics" },
-    { label: "Critical Care", path: "/products/critical-care" },
-    { label: "Oncology", path: "/products/oncology" }
-  ];
-
+  // Legal links data
   const legalLinks = [
     { label: "Terms & Conditions", path: "/terms" },
     { label: "Privacy Policy", path: "/privacy" },
     { label: "Cookie Policy", path: "/cookies" },
-    { label: "Regulatory", path: "/regulatory" }
+    { label: "Regulatory", path: "/regulatory" },
   ];
 
+  // Social media links data
   const socialLinks = [
     { icon: Facebook, label: "Facebook", url: "#" },
     { icon: Twitter, label: "Twitter", url: "#" },
     { icon: Linkedin, label: "LinkedIn", url: "#" },
-    { icon: Instagram, label: "Instagram", url: "#" }
+    { icon: Instagram, label: "Instagram", url: "#" },
   ];
+
+  // ✅ Function to handle subscription form submission
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault(); // Prevents page refresh
+
+    // Send email using EmailJS
+    emailjs
+      .send(
+        "service_hu1sl18", // 🔑 Replace with your EmailJS Service ID
+        "template_sz2gz8r", // 🔑 Replace with your EmailJS Template ID
+        { subscriber_email: email }, // ✅ Template variable
+        "NMDqOY25nYKZMWK9c" // 🔑 Replace with your EmailJS Public Key
+      )
+      .then(
+        () => {
+          setStatus("✅ Subscription successful!"); // Success message
+          setEmail(""); // Reset email field
+        },
+        () => {
+          setStatus("❌ Subscription failed. Try again."); // Error message
+        }
+      );
+  };
 
   return (
     <footer className="bg-primary text-white">
-      {/* Newsletter Section */}
+      {/* ================= NEWSLETTER SUBSCRIPTION SECTION ================= */}
       <div className="border-b border-white/10">
         <div className="container mx-auto px-4 py-12">
           <div className="max-w-4xl mx-auto text-center">
             <h3 className="text-3xl font-bold mb-4">Stay Updated</h3>
             <p className="text-xl text-white/90 mb-8">
-              Get the latest news about our products, research breakthroughs, and industry insights.
+              Get the latest news about our products, research breakthroughs, and
+              industry insights.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            {/* ✅ Subscription Form */}
+            <form
+              onSubmit={handleSubscribe}
+              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+            >
+              {/* Email Input Field */}
               <Input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} // Updates state
                 placeholder="Enter your email"
+                required
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
               />
-              <Button variant="secondary" className="group">
+              {/* Subscribe Button */}
+              <Button type="submit" variant="secondary" className="group">
                 Subscribe
                 <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
-            </div>
+            </form>
+            {/* ✅ Show status messages */}
+            {status && <p className="mt-3 text-sm">{status}</p>}
           </div>
         </div>
       </div>
 
-      {/* Main Footer Content */}
+      {/* ================= MAIN FOOTER CONTENT ================= */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-5 gap-8">
-          {/* Company Info */}
+          {/* ---------- Company Info ---------- */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-6">
               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
@@ -72,13 +113,15 @@ const Footer = () => {
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-2xl text-white">Peony</span>
-                <span className="text-sm text-white/80 -mt-1">Life Sciences</span>
+                <span className="text-sm text-white/80 -mt-1">
+                  Life Sciences
+                </span>
               </div>
             </div>
             <p className="text-white/90 mb-6 leading-relaxed">
-              Leading pharmaceutical innovation with world-class quality standards,
-              delivering life-saving medicines to patients globally through cutting-edge
-              research and manufacturing excellence.
+              Leading pharmaceutical innovation with world-class quality
+              standards, delivering life-saving medicines to patients globally
+              through cutting-edge research and manufacturing excellence.
             </p>
             <div className="space-y-3 mb-6">
               <div className="flex items-center">
@@ -97,7 +140,7 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Map Embed */}
+            {/* Google Maps Embed */}
             <div className="rounded-lg overflow-hidden shadow-lg">
               <iframe
                 title="Company Location"
@@ -112,7 +155,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* ---------- Quick Links ---------- */}
           <div>
             <h4 className="font-bold text-lg mb-6">Quick Links</h4>
             <ul className="space-y-3">
@@ -129,24 +172,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Products */}
-          <div>
-            <h4 className="font-bold text-lg mb-6">Products</h4>
-            <ul className="space-y-3">
-              {productCategories.map((category, index) => (
-                <li key={index}>
-                  <Link
-                    to={category.path}
-                    className="text-white/80 hover:text-white transition-colors duration-200"
-                  >
-                    {category.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal */}
+          {/* ---------- Legal ---------- */}
           <div>
             <h4 className="font-bold text-lg mb-6">Legal</h4>
             <ul className="space-y-3 mb-6">
@@ -162,7 +188,7 @@ const Footer = () => {
               ))}
             </ul>
 
-            {/* Social Links */}
+            {/* ---------- Social Links ---------- */}
             <div>
               <h5 className="font-semibold mb-4">Follow Us</h5>
               <div className="flex space-x-3">
@@ -182,7 +208,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* ================= BOTTOM BAR ================= */}
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">

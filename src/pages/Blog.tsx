@@ -115,7 +115,7 @@ const Blog = () => {
               <Button variant="secondary" size="lg" className="text-lg px-8">
                 Subscribe to Newsletter
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 border-white text-white hover:bg-white hover:text-primary">
+              <Button variant="secondary" size="lg" className="text-lg px-8">
                 Browse Topics
               </Button>
             </div>
@@ -285,7 +285,7 @@ const Blog = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 bg-primary">
+      {/* <section className="py-16 bg-primary">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             Stay Updated with Latest Insights
@@ -304,7 +304,7 @@ const Blog = () => {
             </Button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>

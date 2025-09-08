@@ -7,9 +7,9 @@ import heroImage from "@/assets/hero-pharma-lab.jpg";
 const HeroSection = () => {
   const [ref, isVisible] = useScrollAnimation();
   const navigate = useNavigate();
-  const toNavigateProducts =() => {
-    navigate('/products');
-  }
+  // const toNavigateProducts =() => {
+  //   navigate('/products');
+  // }
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -70,7 +70,7 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button 
+            {/* <Button 
               variant="hero" 
               size="lg" 
               className="text-lg px-8 py-4 min-w-[200px] group"
@@ -78,7 +78,7 @@ const HeroSection = () => {
             >
               Explore Products
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            </Button> */}
             <Button 
               variant="secondary" 
               size="lg" 

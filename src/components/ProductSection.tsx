@@ -8,9 +8,9 @@ const ProductSection = () => {
   const [ref, isVisible] = useScrollAnimation();
   const [categoriesRef, visibleCategories] = useStaggeredAnimation(3);
   const navigate = useNavigate();
-  const toNavigateProducts = () => {
-    navigate('/products');
-  }
+  // const toNavigateProducts = () => {
+  //   navigate('/products');
+  // }
 
   const productCategories = [
     {
