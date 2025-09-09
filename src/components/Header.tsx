@@ -50,7 +50,7 @@ const Header = () => {
               padding: "6px",
               backgroundColor: "var(--company-logo_bg)",
             }} className="company-logo rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl"><img src={companyLogo} /></span>
+              <img src={companyLogo} alt="Peony Life Sciences Logo" className="w-full h-auto max-w-[78px] object-contain" />
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-lg text-primary">Peony</span>
