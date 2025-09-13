@@ -49,7 +49,7 @@ const About = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="pt-24 pb-16 bg-gradient-hero">
         <div className="container mx-auto px-4 text-center">
@@ -57,45 +57,49 @@ const About = () => {
             About Peony Life Sciences
           </h1>
           <p className="text-xl text-white/90 max-w-3xl mx-auto">
-            Pioneering pharmaceutical excellence since 1999, we combine cutting-edge research 
+            Pioneering pharmaceutical excellence since 1999, we combine cutting-edge research
             with world-class manufacturing to deliver life-changing medicines worldwide.
           </p>
         </div>
       </section>
 
       {/* Company Overview */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+      <section className="py-4 m-4 bg-white">
+        <div className="mx-auto shadow-lg rounded-xl bg-white">
+          <div className="grid md:grid-cols-2 p-4 gap-6 items-center">
+            <div className="px-4">
               <h2 className="text-4xl font-bold text-black mb-6">
                 NOW YOUR HEALTH IS YOURS
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Peony Life Sciences is a leading pharmaceutical supply chain company dedicated to 
-                benefiting customers, the public, and distributors. We specialize in providing 
-                high-quality medical supplies and pharmaceutical solutions to healthcare providers 
+                Peony Life Sciences is a leading pharmaceutical supply chain company dedicated to
+                benefiting customers, the public, and distributors. We specialize in providing
+                high-quality medical supplies and pharmaceutical solutions to healthcare providers
                 worldwide.
               </p>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                With over 70+ products in our portfolio, including veterinary medicines, we ensure 
-                secure inventory management and 24/7 customer service support to meet all your 
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                With over 70+ products in our portfolio, including veterinary medicines, we ensure
+                secure inventory management and 24/7 customer service support to meet all your
                 pharmaceutical needs.
               </p>
               {/* <Button variant="medical" size="lg">
                 Download Our Mobile App
               </Button> */}
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-gradient-subtle p-6 rounded-xl">
                 <Globe className="w-12 h-12 text-primary mb-4" />
                 <h3 className="text-xl font-bold mb-2">Global Reach</h3>
-                <p className="text-muted-foreground">Serving customers in 50+ countries worldwide</p>
+                <p className="text-muted-foreground">
+                  Serving customers in 50+ countries worldwide
+                </p>
               </div>
               <div className="bg-gradient-subtle p-6 rounded-xl">
                 <Microscope className="w-12 h-12 text-primary mb-4" />
                 <h3 className="text-xl font-bold mb-2">R&D Excellence</h3>
-                <p className="text-muted-foreground">Continuous innovation in pharmaceutical research</p>
+                <p className="text-muted-foreground">
+                  Continuous innovation in pharmaceutical research
+                </p>
               </div>
             </div>
           </div>
@@ -103,13 +107,13 @@ const About = () => {
       </section>
 
       {/* Mission, Vision, Values */}
-      <section className="py-16 bg-gradient-subtle">
+      <section className="py-6 bg-gradient-subtle">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-black mb-4">Our Foundation</h2>
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold text-black mb-2">Our Foundation</h2>
             <p className="text-xl text-muted-foreground">Built on strong principles and clear vision</p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {values.map((item, index) => (
               <div key={index} className="group bg-white rounded-xl p-8 shadow-card hover:shadow-medical transition-all duration-300 transform hover:scale-105">
@@ -125,13 +129,13 @@ const About = () => {
       </section>
 
       {/* Achievements */}
-      <section className="py-16 bg-white">
+      <section className="py-8 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-black mb-4">Our Achievements</h2>
+          <div className="text-center mb-6">
+            <h2 className="text-4xl font-bold text-black mb-2">Our Achievements</h2>
             <p className="text-xl text-muted-foreground">Numbers that reflect our commitment to excellence</p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {achievements.map((achievement, index) => (
               <div key={index} className="group">
@@ -147,13 +151,13 @@ const About = () => {
       </section>
 
       {/* Company Timeline */}
-      <section className="py-16 bg-gradient-subtle">
+      <section className="py-4 pb-8 bg-gradient-subtle">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-black mb-4">Our Journey</h2>
+          <div className="text-center mb-6">
+            <h2 className="text-4xl font-bold text-black mb-2">Our Journey</h2>
             <p className="text-xl text-muted-foreground">25+ years of pharmaceutical excellence</p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
             {milestones.map((milestone, index) => (
               <div key={index} className="text-center">

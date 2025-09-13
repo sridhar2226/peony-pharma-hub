@@ -2,6 +2,8 @@ import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 import * as React from "react"
+import { Link, useLocation } from "react-router-dom";
+import companyLogo from "@/assets/LIFE SCIENCES.png";
 
 import { cn } from "@/lib/utils"
 
@@ -62,12 +64,41 @@ const SheetContent = React.forwardRef<
       className={cn(sheetVariants({ side }), className)}
       {...props}
     >
+      {/* Top bar with logo left + close right */}
+      <div className="flex items-center justify-between pt-0 py-3">
+        <Link to="/" className="flex items-center space-x-2">
+          <div
+            style={{
+              width: "70px",
+              padding: "4px",
+              backgroundColor: "var(--company-logo_bg)",
+            }}
+            className="company-logo rounded-lg flex items-center justify-center"
+          >
+            <img
+              src={companyLogo}
+              alt="Peony Life Sciences Logo"
+              className="w-full h-auto max-w-[60px] object-contain"
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold text-base text-primary">Peony</span>
+            <span className="text-[10px] text-muted-foreground -mt-1">
+              Life Sciences
+            </span>
+          </div>
+        </Link>
+
+        <SheetPrimitive.Close className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+          <X className="h-5 w-5" />
+          <span className="sr-only">Close</span>
+        </SheetPrimitive.Close>
+      </div>
+
+      {/* Rest of the sheet content */}
       {children}
-      <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-        <X className="h-4 w-4" />
-        <span className="sr-only">Close</span>
-      </SheetPrimitive.Close>
     </SheetPrimitive.Content>
+
   </SheetPortal>
 ))
 SheetContent.displayName = SheetPrimitive.Content.displayName

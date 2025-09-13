@@ -5,12 +5,13 @@ import AboutPreview from "@/components/AboutPreview";
 // import ShopSection from "@/components/ShopSection";
 // import ResearchQuality from "@/components/ResearchQuality";
 import Footer from "@/components/Footer";
+import '../App.css'
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div>
       <Header />
-      <main>
+      <main className="mt-16 main-conatiner">
         <HeroSection />
         <AboutPreview />
         {/* <ProductSection /> */}

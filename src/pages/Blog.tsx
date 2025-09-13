@@ -186,7 +186,7 @@ const Blog = () => {
                       {featuredPost.excerpt}
                     </p>
                     
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between flex-wrap gap-3">
                       <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
                           <User className="w-4 h-4 text-muted-foreground" />
@@ -256,7 +256,7 @@ const Blog = () => {
                     {post.excerpt}
                   </p>
                   
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between flex-wrap">
                     <div className="text-xs text-muted-foreground">
                       <div className="flex items-center gap-1 mb-1">
                         <User className="w-3 h-3" />

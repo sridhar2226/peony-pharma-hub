@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, ShoppingCart } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ThemeToggle } from "@/components/ThemeToggle";
+// import { ThemeToggle } from "@/components/ThemeToggle";
 import { useNavigate } from "react-router-dom";
 import companyLogo from "@/assets/LIFE SCIENCES.png";
 
@@ -58,91 +58,81 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`font-medium transition-colors duration-200 ${isActive(item.path)
-                  ? "text-primary border-b-2 border-primary"
-                  : "text-foreground hover:text-primary"
-                  }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <ThemeToggle />
-            <Button variant="ghost" size="sm" className="text-primary" onClick={navigateToContact}>
-              <Phone className="w-4 h-4 mr-2" />
-              Contact Us
-            </Button>
-            <Button variant="medical" size="sm" onClick={() => window.open('https://preview--product-lane-shop.lovable.app/', '_blank')}>
-              <ShoppingCart className="w-4 h-4 mr-2" />
-              Order Online
-            </Button>
+          {/* Desktop Navigation (centered) */}
+          <div className="hidden lg:flex flex-1 mr-12 justify-center">
+            <nav className="flex items-center space-x-8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`font-medium transition-colors duration-200 ${isActive(item.path)
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-foreground hover:text-primary"
+                    }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
           </div>
 
-          {/* Mobile Menu Sheet */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="sm" className="lg:hidden">
-                <Menu className="w-6 h-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-80">
-              <div className="py-6">
-                {/* Logo in Mobile Menu */}
-                <Link to="/" className="flex items-center space-x-2 mb-8" onClick={() => setIsOpen(false)}>
-                  <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">P</span>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-bold text-lg text-primary">Peony</span>
-                    <span className="text-xs text-muted-foreground -mt-1">Life Sciences</span>
-                  </div>
-                </Link>
+          {/* Right Side (Mobile Only) */}
+          <div className="flex items-center space-x-2 lg:hidden">
+            {/* Cart Button */}
+            <Button
+              variant="medical"
+              size="sm"
+              onClick={() => {
+                naviagte("/shop");
+              }}
+            >
+              <ShoppingCart className="w-4 h-4" />
+            </Button>
+            {/* Mobile Menu Sheet */}
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="sm" className="lg:hidden">
+                  <Menu className="w-6 h-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-80">
+                <div className="py-6">
+                  {/* Navigation Links */}
+                  <nav className="space-y-4">
+                    {navItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        className={`block py-3 px-4 rounded-lg font-medium transition-colors duration-200 ${isActive(item.path)
+                          ? "bg-primary text-white"
+                          : "text-foreground hover:bg-muted"
+                          }`}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </nav>
 
-                {/* Navigation Links */}
-                <nav className="space-y-4 mb-8">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.path}
-                      to={item.path}
-                      className={`block py-3 px-4 rounded-lg font-medium transition-colors duration-200 ${isActive(item.path)
-                        ? "bg-primary text-white"
-                        : "text-foreground hover:bg-muted"
-                        }`}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </nav>
-
-                {/* CTA Buttons */}
-                <div className="space-y-3">
-                  <div className="flex justify-start">
-                    <ThemeToggle />
+                  {/* CTA Buttons */}
+                  <div className="space-y-3">
+                    <div className="flex justify-start">
+                      {/* <ThemeToggle /> */}
+                    </div>
+                    {/* <Button variant="ghost" className="w-full justify-start">
+                      <Phone className="w-4 h-4 mr-2" />
+                      Contact Us
+                    </Button> */}
+                    <Button variant="medical" className="w-full" onClick={() => window.open('https://preview--product-lane-shop.lovable.app/', '_blank')}>
+                      <ShoppingCart className="w-4 h-4 mr-2" />
+                      Order Online
+                    </Button>
                   </div>
-                  <Button variant="ghost" className="w-full justify-start">
-                    <Phone className="w-4 h-4 mr-2" />
-                    Contact Us
-                  </Button>
-                  <Button variant="medical" className="w-full" onClick={() => window.open('https://preview--product-lane-shop.lovable.app/', '_blank')}>
-                    <ShoppingCart className="w-4 h-4 mr-2" />
-                    Order Online
-                  </Button>
                 </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
-
       </div >
     </header >
   );

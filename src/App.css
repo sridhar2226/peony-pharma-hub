@@ -1,9 +1,4 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+
 
 .logo {
   height: 6em;
@@ -45,4 +40,23 @@
   width: 90px;
   padding: 6px;
   background-color: var(--company-logo_bg);
+}
+
+.hero-section_main {
+  /* min-height: calc(100dvh - 160px); fill viewport minus navbar */
+  max-height: 100dvh;
+  padding-top: 24px;
+}
+
+.main-conatiner {
+  background-color: ;
+}
+
+@media screen and (max-width: 776px) {
+.hero-section_main {
+  /* min-height: calc(100dvh - 260px) !important; 80px = your navbar height */
+  max-height: 100dvh;
+
+}
+  
 }

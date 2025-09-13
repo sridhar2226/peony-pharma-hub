@@ -18,6 +18,7 @@ import {
   Send,
   MessageSquare,
   HeadphonesIcon,
+  User
 } from "lucide-react";
 
 const Contact = () => {
@@ -120,10 +121,10 @@ const Contact = () => {
       </section>
 
       {/* Contact Information */}
-      <section className="py-16 bg-white">
+      <section className="py-8 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
+          <div className="text-center mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-2">
               Get in Touch
             </h2>
             <p className="text-xl text-muted-foreground">
@@ -162,16 +163,16 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Departments */}
-      <section className="py-16 bg-gradient-subtle">
-        <div className="container mx-auto px-4">
+      <section className="py-4 bg-gradient-subtle">
+        <div className="px-4 mx-auto">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div>
-              <h2 className="text-3xl font-bold text-foreground mb-8">
+              <h2 className="text-3xl font-bold text-foreground mb-4">
                 Send us a Message
               </h2>
-              <Card className="bg-white shadow-card">
-                <CardContent className="p-8">
+              <Card className="bg-white shadow-card mr-3">
+                <CardContent className="p-4">
                   <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -261,7 +262,7 @@ const Contact = () => {
 
             {/* Department Contacts */}
             <div>
-              <h2 className="text-3xl font-bold text-foreground mb-8">
+              <h2 className="text-3xl font-bold text-foreground mb-4">
                 Department Contacts
               </h2>
               <div className="space-y-6">
@@ -270,7 +271,7 @@ const Contact = () => {
                     key={index}
                     className="bg-white shadow-card hover:shadow-medical transition-all duration-300"
                   >
-                    <CardContent className="p-6">
+                    <CardContent className="p-4">
                       <div className="flex items-start gap-4">
                         <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
                           <dept.icon className="w-6 h-6 text-white" />
@@ -302,40 +303,52 @@ const Contact = () => {
                   </Card>
                 ))}
               </div>
+
+              <section className="py-4">
+                <Card className="p-4">
+                  <CardContent className="p-0">
+                    <div className="flex items-start gap-4">
+                      <div className="flex align-items-centr gap-2">
+                        <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                          <User className="text-white" />
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold mb-2">
+                          Ready to Partner with Us?
+                        </h3>
+                        <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+                          Whether you're a healthcare provider, distributor, or pharmaceutical
+                          partner, we're here to support your needs with excellence and
+                          reliability.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Button
+                        variant="secondary"
+                        size="lg"
+                        className="text-lg px-8"
+                        onClick={() =>
+                          window.open(
+                            "https://calendar.google.com/calendar/u/0/r/eventedit?add=info@peonylifesciences.com",
+                            "_blank"
+                          )
+                        }
+                      >
+                        Schedule a Meeting
+                      </Button>
+
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Partner with Us?
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Whether you're a healthcare provider, distributor, or pharmaceutical
-            partner, we're here to support your needs with excellence and
-            reliability.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="secondary"
-              size="lg"
-              className="text-lg px-8"
-              onClick={() =>
-                window.open(
-                  "https://calendar.google.com/calendar/u/0/r/eventedit?add=info@peonylifesciences.com",
-                  "_blank"
-                )
-              }
-            >
-              Schedule a Meeting
-            </Button>
-
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>
