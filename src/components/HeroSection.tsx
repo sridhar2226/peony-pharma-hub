@@ -20,7 +20,7 @@ const HeroSection = () => {
         {/* Content */}
         <div className="container mx-auto px-6 text-center">
           {/* Trust Badges */}
-          <div
+          {/* <div
             ref={badgesRef}
             className={`flex justify-center gap-8 w-100 align-items-center mb-4 transition-all duration-1000 ${
               badgesVisible ? "animate-fade-in-up" : "opacity-0"
@@ -38,7 +38,7 @@ const HeroSection = () => {
               <Globe className="w-5 h-5 mr-2" />
               Global Reach
             </div>
-          </div>
+          </div> */}
 
           {/* Headline */}
           <h1

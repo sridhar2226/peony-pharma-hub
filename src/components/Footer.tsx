@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser"; // ✅ Import EmailJS to send emails
+import companyLogo from "@/assets/LIFE SCIENCES.png";
+
 
 const Footer = () => {
   // State to store user email input
@@ -42,9 +44,18 @@ const Footer = () => {
     { icon: Instagram, label: "Instagram", url: "#" },
   ];
 
-  // ✅ Function to handle subscription form submission
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault(); // Prevents page refresh
+    e.preventDefault();
+
+    if (!validateEmail(email)) {
+      setStatus("❌ Please enter a valid email address.");
+      return;
+    }
 
     // Send email using EmailJS
     emailjs
@@ -65,6 +76,7 @@ const Footer = () => {
       );
   };
 
+
   return (
     <footer className="bg-primary text-white">
       {/* ================= NEWSLETTER SUBSCRIPTION SECTION ================= */}
@@ -81,23 +93,29 @@ const Footer = () => {
               onSubmit={handleSubscribe}
               className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
             >
-              {/* Email Input Field */}
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)} // Updates state
-                placeholder="Enter your email"
-                required
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
-              />
-              {/* Subscribe Button */}
+              <div className="flex flex-col w-full">
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                />
+                {status && (
+                  <p
+                    className="mt-2 text-sm font-bold text-white"
+                  >
+                    {status}
+                  </p>
+                )}
+              </div>
+
               <Button type="submit" variant="secondary" className="group">
                 Subscribe
                 <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </form>
-            {/* ✅ Show status messages */}
-            {status && <p className="mt-3 text-sm">{status}</p>}
           </div>
         </div>
       </div>
@@ -108,8 +126,19 @@ const Footer = () => {
           {/* ---------- Company Info ---------- */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-primary font-bold text-2xl">P</span>
+              <div
+                style={{
+                  width: "70px",
+                  padding: "4px",
+                  backgroundColor: "white",
+                }}
+                className="company-logo rounded-lg flex items-center justify-center"
+              >
+                <img
+                  src={companyLogo}
+                  alt="Peony Life Sciences Logo"
+                  className="w-full h-auto max-w-[60px] object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-2xl text-white">Peony</span>
@@ -215,13 +244,13 @@ const Footer = () => {
             <p className="text-white/80 text-sm mb-4 md:mb-0">
               © 2024 Peony Life Sciences. All rights reserved.
             </p>
-            <div className="flex items-center space-x-6 text-sm text-white/80">
+            {/* <div className="flex items-center space-x-6 text-sm text-white/80">
               <span>WHO-GMP Certified</span>
               <span>•</span>
               <span>FDA Approved</span>
               <span>•</span>
               <span>ISO 9001:2015</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
