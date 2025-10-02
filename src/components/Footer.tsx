@@ -41,7 +41,7 @@ const Footer = () => {
     { icon: Facebook, label: "Facebook", url: "#" },
     { icon: Twitter, label: "Twitter", url: "#" },
     { icon: Linkedin, label: "LinkedIn", url: "#" },
-    { icon: Instagram, label: "Instagram", url: "#" },
+    { icon: Instagram, label: "Instagram", url: "https://www.instagram.com/p/DPTjPkLk1oY/?igsh=b3VlenYwdmJzNGV1" },
   ];
 
   const validateEmail = (email: string) => {
@@ -225,6 +225,7 @@ const Footer = () => {
                   <a
                     key={index}
                     href={social.url}
+                    target="_blank"
                     className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors duration-200"
                     aria-label={social.label}
                   >
