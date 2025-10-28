@@ -10,6 +10,7 @@ import {
   Twitter,
   Linkedin,
   Instagram,
+  Youtube
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser"; // ✅ Import EmailJS to send emails
@@ -40,8 +41,8 @@ const Footer = () => {
   const socialLinks = [
     { icon: Facebook, label: "Facebook", url: "#" },
     { icon: Twitter, label: "Twitter", url: "#" },
-    { icon: Linkedin, label: "LinkedIn", url: "#" },
-    { icon: Instagram, label: "Instagram", url: "https://www.instagram.com/p/DPTjPkLk1oY/?igsh=b3VlenYwdmJzNGV1" },
+    { icon: Instagram, label: "Instagram", url: "https://www.instagram.com/peonylifesciences?igsh=MWJ4ZXhmMmc2eTJu" },
+        { icon: Youtube, label: "Youtube", url: "https://www.youtube.com/@peonylifesciences3585" }
   ];
 
   const validateEmail = (email: string) => {
@@ -161,23 +162,34 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <Phone className="w-5 h-5 text-secondary mr-3" />
-                <span className="text-white/90">+1 (555) 123-4567</span>
+                <a
+                  href="tel:+919980934770"
+                  className="text-white/90 hover:text-secondary transition"
+                >
+                  +91 99809 34770
+                </a>
               </div>
-              <div className="flex items-center">
+
+              <div className="flex items-center mt-2">
                 <Mail className="w-5 h-5 text-secondary mr-3" />
-                <span className="text-white/90">info@peonypharma.com</span>
+                <a
+                  href="mailto:marketing@peonylifesciences.com"
+                  className="text-white/90 hover:text-secondary transition"
+                >
+                  marketing@peonylifesciences.com
+                </a>
               </div>
+
             </div>
 
             {/* Google Maps Embed */}
             <div className="rounded-lg overflow-hidden shadow-lg">
               <iframe
-                title="Company Location"
-                src="https://www.google.com/maps?q=20J,RV+NAGAR,+1ST+STREET+PATTUKKOTTAI+614601&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1314.3036896828805!2d79.31950651608484!3d10.415140276229184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0001000361c091%3A0x4cedefc4b11fb454!2sPeonylifesciences!5e0!3m2!1sen!2sin!4v1761677797558!5m2!1sen!2sin"
                 width="100%"
                 height="200"
                 style={{ border: 0 }}
-                allowFullScreen={true}
+                allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
@@ -243,7 +255,7 @@ const Footer = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-white/80 text-sm mb-4 md:mb-0">
-              © 2024 Peony Life Sciences. All rights reserved.
+              © 2025 Peony Life Sciences. All rights reserved.
             </p>
             {/* <div className="flex items-center space-x-6 text-sm text-white/80">
               <span>WHO-GMP Certified</span>

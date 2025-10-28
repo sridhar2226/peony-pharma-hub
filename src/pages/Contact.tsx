@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
 import Header from "@/components/Header";
@@ -18,29 +18,115 @@ import {
   Send,
   MessageSquare,
   HeadphonesIcon,
-  User
+  User,
 } from "lucide-react";
+
+// ✅ Define types for form and error states
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  company: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
+interface FormErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  company?: string;
+  phone?: string;
+  subject?: string;
+  message?: string;
+}
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
-  // handle form submit
-  const sendEmail = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState<FormData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  // ✅ Regex patterns
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[0-9]{10}$/;
+
+  const validate = (name: keyof FormData, value: string) => {
+    let error = "";
+
+    if (name === "firstName" && value.trim().length < 2) {
+      error = "First name must be at least 2 characters";
+    } else if (name === "email" && !emailRegex.test(value)) {
+      error = "Enter a valid email address";
+    } else if (name === "phone" && value && !phoneRegex.test(value)) {
+      error = "Phone number must be 10 digits";
+    }
+
+    setErrors((prev) => ({ ...prev, [name]: error }));
+  };
+
+  // ✅ Restrict phone input to numbers only
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    if (name === "phone") {
+      // Allow only digits and limit to 10 digits
+      const numericValue = value.replace(/[^0-9]/g, "").slice(0, 10);
+      setFormData((prev) => ({ ...prev, [name]: numericValue }));
+      validate(name, numericValue);
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+      validate(name as keyof FormData, value);
+    }
+  };
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!formRef.current) return;
+    // Final validation before submit
+    Object.keys(formData).forEach((key) =>
+      validate(key as keyof FormData, formData[key as keyof FormData])
+    );
+
+    const hasError = Object.values(errors).some((err) => err);
+    if (hasError) {
+      alert("Please correct errors before submitting.");
+      return;
+    }
 
     emailjs
       .sendForm(
-        "service_9frkuo5", // replace with EmailJS service ID
-        "template_wz7j3mf", // replace with EmailJS template ID
-        formRef.current,
-        "NMDqOY25nYKZMWK9c" // replace with EmailJS public key
+        "service_9frkuo5", // Replace with your EmailJS Service ID
+        "template_wz7j3mf", // Replace with your Template ID
+        formRef.current!,
+        "NMDqOY25nYKZMWK9c" // Replace with your Public Key
       )
       .then(
         () => {
           alert("✅ Message sent successfully!");
           formRef.current?.reset();
+          setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            company: "",
+            phone: "",
+            subject: "",
+            message: "",
+          });
+          setErrors({});
         },
         (error) => {
           console.error("❌ Failed:", error.text);
@@ -59,8 +145,8 @@ const Contact = () => {
       icon: Phone,
       title: "Phone Numbers",
       details: [
-        "+1 (555) 123-4567",
-        "+1 (555) 987-6543",
+        "+91 99809 34770",
+        "+91 70109 66990",
         "Toll Free: 1-800-PEONY-LS",
       ],
     },
@@ -68,7 +154,7 @@ const Contact = () => {
       icon: Mail,
       title: "Email Addresses",
       details: [
-        "info@peonylifesciences.com",
+        "marketing@peonylifesciences.com",
         "sales@peonylifesciences.com",
         "support@peonylifesciences.com",
       ],
@@ -90,8 +176,8 @@ const Contact = () => {
       title: "General Inquiries",
       description:
         "For general questions about our company, products, and services.",
-      email: "info@peonylifesciences.com",
-      phone: "+1 (555) 123-4567",
+      email: "marketing@peonylifesciences.com",
+      phone: "+91 99809 34770",
     },
     {
       icon: HeadphonesIcon,
@@ -99,7 +185,7 @@ const Contact = () => {
       description:
         "24/7 support for existing customers and product-related queries.",
       email: "support@peonylifesciences.com",
-      phone: "+1 (555) 987-6543",
+      phone: "+91 70109 66990",
     },
   ];
 
@@ -181,8 +267,15 @@ const Contact = () => {
                           name="firstName"
                           id="firstName"
                           placeholder="Enter your first name"
+                          value={formData.firstName}
+                          onChange={handleChange}
                           required
                         />
+                        {errors.firstName && (
+                          <p className="text-red-500 text-sm">
+                            {errors.firstName}
+                          </p>
+                        )}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="lastName">Last Name *</Label>
@@ -190,6 +283,8 @@ const Contact = () => {
                           name="lastName"
                           id="lastName"
                           placeholder="Enter your last name"
+                          value={formData.lastName}
+                          onChange={handleChange}
                           required
                         />
                       </div>
@@ -202,8 +297,13 @@ const Contact = () => {
                         id="email"
                         type="email"
                         placeholder="Enter your email address"
+                        value={formData.email}
+                        onChange={handleChange}
                         required
                       />
+                      {errors.email && (
+                        <p className="text-red-500 text-sm">{errors.email}</p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
@@ -212,17 +312,27 @@ const Contact = () => {
                         name="company"
                         id="company"
                         placeholder="Enter your company name"
+                        value={formData.company}
+                        onChange={handleChange}
                       />
                     </div>
 
+                    {/* ✅ Phone Number (only digits allowed) */}
                     <div className="space-y-2">
                       <Label htmlFor="phone">Phone Number</Label>
                       <Input
                         name="phone"
                         id="phone"
                         type="tel"
-                        placeholder="Enter your phone number"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        placeholder="Enter your 10-digit phone number"
+                        value={formData.phone}
+                        onChange={handleChange}
                       />
+                      {errors.phone && (
+                        <p className="text-red-500 text-sm">{errors.phone}</p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
@@ -231,6 +341,8 @@ const Contact = () => {
                         name="subject"
                         id="subject"
                         placeholder="Enter message subject"
+                        value={formData.subject}
+                        onChange={handleChange}
                         required
                       />
                     </div>
@@ -242,6 +354,8 @@ const Contact = () => {
                         id="message"
                         placeholder="Enter your message here..."
                         className="min-h-[120px]"
+                        value={formData.message}
+                        onChange={handleChange}
                         required
                       />
                     </div>
@@ -308,19 +422,17 @@ const Contact = () => {
                 <Card className="p-4">
                   <CardContent className="p-0">
                     <div className="flex items-start gap-4">
-                      <div className="flex align-items-centr gap-2">
-                        <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                          <User className="text-white" />
-                        </div>
+                      <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                        <User className="text-white" />
                       </div>
                       <div>
                         <h3 className="text-xl font-bold mb-2">
                           Ready to Partner with Us?
                         </h3>
                         <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                          Whether you're a healthcare provider, distributor, or pharmaceutical
-                          partner, we're here to support your needs with excellence and
-                          reliability.
+                          Whether you're a healthcare provider, distributor, or
+                          pharmaceutical partner, we're here to support your
+                          needs with excellence and reliability.
                         </p>
                       </div>
                     </div>
@@ -338,7 +450,6 @@ const Contact = () => {
                       >
                         Schedule a Meeting
                       </Button>
-
                     </div>
                   </CardContent>
                 </Card>
@@ -347,8 +458,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
 
       <Footer />
     </div>
