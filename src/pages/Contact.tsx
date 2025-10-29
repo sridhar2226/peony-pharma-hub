@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
 import Header from "@/components/Header";
@@ -21,7 +21,7 @@ import {
   User,
 } from "lucide-react";
 
-// ✅ Define types for form and error states
+// ✅ Types
 interface FormData {
   firstName: string;
   lastName: string;
@@ -42,9 +42,114 @@ interface FormErrors {
   message?: string;
 }
 
+// ✅ Neuron Background Component
+const NeuronBackground = () => {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const animationRef = useRef<number>();
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d")!;
+    const particles: {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+    }[] = [];
+    const numParticles = 80;
+    const mouse = { x: 0, y: 0 };
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    for (let i = 0; i < numParticles; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+      });
+    }
+
+    const draw = () => {
+      ctx.fillStyle = "linear-gradient(to right, #0f5132, #145a32)";
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#052e16";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < numParticles; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        const dx = p.x - mouse.x;
+        const dy = p.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          p.vx += dx * -0.0004;
+          p.vy += dy * -0.0004;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = "#00ff9d";
+        ctx.fill();
+      }
+
+      for (let i = 0; i < numParticles; i++) {
+        for (let j = i + 1; j < numParticles; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            const opacity = 1 - dist / 100;
+            ctx.strokeStyle = `rgba(0,255,157,${opacity * 0.5})`;
+            ctx.lineWidth = 0.7;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationRef.current = requestAnimationFrame(draw);
+    };
+
+    const mouseMove = (e: MouseEvent) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+    window.addEventListener("mousemove", mouseMove);
+
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animationRef.current!);
+      window.removeEventListener("mousemove", mouseMove);
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed top-0 left-0 w-full h-full -z-10"
+    />
+  );
+};
+
+// ✅ Contact Component
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
-
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -54,35 +159,27 @@ const Contact = () => {
     subject: "",
     message: "",
   });
-
   const [errors, setErrors] = useState<FormErrors>({});
 
-  // ✅ Regex patterns
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^[0-9]{10}$/;
 
   const validate = (name: keyof FormData, value: string) => {
     let error = "";
-
-    if (name === "firstName" && value.trim().length < 2) {
+    if (name === "firstName" && value.trim().length < 2)
       error = "First name must be at least 2 characters";
-    } else if (name === "email" && !emailRegex.test(value)) {
+    else if (name === "email" && !emailRegex.test(value))
       error = "Enter a valid email address";
-    } else if (name === "phone" && value && !phoneRegex.test(value)) {
+    else if (name === "phone" && value && !phoneRegex.test(value))
       error = "Phone number must be 10 digits";
-    }
-
     setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
-  // ✅ Restrict phone input to numbers only
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-
     if (name === "phone") {
-      // Allow only digits and limit to 10 digits
       const numericValue = value.replace(/[^0-9]/g, "").slice(0, 10);
       setFormData((prev) => ({ ...prev, [name]: numericValue }));
       validate(name, numericValue);
@@ -94,12 +191,9 @@ const Contact = () => {
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // Final validation before submit
     Object.keys(formData).forEach((key) =>
       validate(key as keyof FormData, formData[key as keyof FormData])
     );
-
     const hasError = Object.values(errors).some((err) => err);
     if (hasError) {
       alert("Please correct errors before submitting.");
@@ -108,10 +202,10 @@ const Contact = () => {
 
     emailjs
       .sendForm(
-        "service_9frkuo5", // Replace with your EmailJS Service ID
-        "template_wz7j3mf", // Replace with your Template ID
+        "service_9frkuo5",
+        "template_wz7j3mf",
         formRef.current!,
-        "NMDqOY25nYKZMWK9c" // Replace with your Public Key
+        "NMDqOY25nYKZMWK9c"
       )
       .then(
         () => {
@@ -190,13 +284,14 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative overflow-hidden">
+      <NeuronBackground />
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-hero">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+      <section className="pt-24 pb-16 text-center text-white relative z-10">
+        <div className="container mx-auto px-4">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Contact Us
           </h1>
           <p className="text-xl text-white/90 max-w-3xl mx-auto">
@@ -206,8 +301,8 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Information */}
-      <section className="py-8 bg-white">
+      {/* Contact Info */}
+      <section className="py-8 bg-white relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-6">
             <h2 className="text-4xl font-bold text-foreground mb-2">
@@ -217,7 +312,6 @@ const Contact = () => {
               Multiple ways to reach us for all your pharmaceutical needs
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {contactInfo.map((info, index) => (
               <Card
@@ -233,10 +327,7 @@ const Contact = () => {
                   </h3>
                   <div className="space-y-2">
                     {info.details.map((detail, idx) => (
-                      <p
-                        key={idx}
-                        className="text-muted-foreground text-sm leading-relaxed"
-                      >
+                      <p key={idx} className="text-muted-foreground text-sm">
                         {detail}
                       </p>
                     ))}
@@ -248,212 +339,161 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form & Departments */}
-      <section className="py-4 bg-gradient-subtle">
-        <div className="px-4 mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div>
-              <h2 className="text-3xl font-bold text-foreground mb-4">
-                Send us a Message
-              </h2>
-              <Card className="bg-white shadow-card mr-3">
-                <CardContent className="p-4">
-                  <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name *</Label>
-                        <Input
-                          name="firstName"
-                          id="firstName"
-                          placeholder="Enter your first name"
-                          value={formData.firstName}
-                          onChange={handleChange}
-                          required
-                        />
-                        {errors.firstName && (
-                          <p className="text-red-500 text-sm">
-                            {errors.firstName}
-                          </p>
-                        )}
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name *</Label>
-                        <Input
-                          name="lastName"
-                          id="lastName"
-                          placeholder="Enter your last name"
-                          value={formData.lastName}
-                          onChange={handleChange}
-                          required
-                        />
-                      </div>
-                    </div>
-
+      {/* Contact Form */}
+      <section className="py-4 bg-gradient-subtle relative z-10">
+        <div className="px-4 mx-auto grid lg:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Send us a Message
+            </h2>
+            <Card className="bg-white shadow-card mr-3">
+              <CardContent className="p-4">
+                <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email Address *</Label>
+                      <Label htmlFor="firstName">First Name *</Label>
                       <Input
-                        name="email"
-                        id="email"
-                        type="email"
-                        placeholder="Enter your email address"
-                        value={formData.email}
+                        name="firstName"
+                        id="firstName"
+                        placeholder="Enter your first name"
+                        value={formData.firstName}
                         onChange={handleChange}
                         required
                       />
-                      {errors.email && (
-                        <p className="text-red-500 text-sm">{errors.email}</p>
+                      {errors.firstName && (
+                        <p className="text-red-500 text-sm">{errors.firstName}</p>
                       )}
                     </div>
-
                     <div className="space-y-2">
-                      <Label htmlFor="company">Company/Organization</Label>
+                      <Label htmlFor="lastName">Last Name *</Label>
                       <Input
-                        name="company"
-                        id="company"
-                        placeholder="Enter your company name"
-                        value={formData.company}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    {/* ✅ Phone Number (only digits allowed) */}
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input
-                        name="phone"
-                        id="phone"
-                        type="tel"
-                        inputMode="numeric"
-                        pattern="[0-9]*"
-                        placeholder="Enter your 10-digit phone number"
-                        value={formData.phone}
-                        onChange={handleChange}
-                      />
-                      {errors.phone && (
-                        <p className="text-red-500 text-sm">{errors.phone}</p>
-                      )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="subject">Subject *</Label>
-                      <Input
-                        name="subject"
-                        id="subject"
-                        placeholder="Enter message subject"
-                        value={formData.subject}
+                        name="lastName"
+                        id="lastName"
+                        placeholder="Enter your last name"
+                        value={formData.lastName}
                         onChange={handleChange}
                         required
                       />
                     </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Message *</Label>
-                      <Textarea
-                        name="message"
-                        id="message"
-                        placeholder="Enter your message here..."
-                        className="min-h-[120px]"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-
-                    <Button
-                      type="submit"
-                      variant="medical"
-                      size="lg"
-                      className="w-full flex items-center gap-2"
-                    >
-                      <Send className="w-5 h-5" />
-                      Send Message
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Department Contacts */}
-            <div>
-              <h2 className="text-3xl font-bold text-foreground mb-4">
-                Department Contacts
-              </h2>
-              <div className="space-y-6">
-                {departments.map((dept, index) => (
-                  <Card
-                    key={index}
-                    className="bg-white shadow-card hover:shadow-medical transition-all duration-300"
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      name="email"
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email address"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                    {errors.email && (
+                      <p className="text-red-500 text-sm">{errors.email}</p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="company">Company</Label>
+                    <Input
+                      name="company"
+                      id="company"
+                      placeholder="Enter your company name"
+                      value={formData.company}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      name="phone"
+                      id="phone"
+                      type="tel"
+                      inputMode="numeric"
+                      placeholder="Enter 10-digit phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                    />
+                    {errors.phone && (
+                      <p className="text-red-500 text-sm">{errors.phone}</p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Subject *</Label>
+                    <Input
+                      name="subject"
+                      id="subject"
+                      placeholder="Enter subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message *</Label>
+                    <Textarea
+                      name="message"
+                      id="message"
+                      placeholder="Enter your message..."
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    variant="medical"
+                    size="lg"
+                    className="w-full flex items-center gap-2"
                   >
-                    <CardContent className="p-4">
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                          <dept.icon className="w-6 h-6 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold text-foreground mb-2">
-                            {dept.title}
-                          </h3>
-                          <p className="text-muted-foreground mb-4 leading-relaxed">
-                            {dept.description}
-                          </p>
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-2">
-                              <Mail className="w-4 h-4 text-primary" />
-                              <span className="text-sm text-foreground">
-                                {dept.email}
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Phone className="w-4 h-4 text-primary" />
-                              <span className="text-sm text-foreground">
-                                {dept.phone}
-                              </span>
-                            </div>
+                    <Send className="w-5 h-5" />
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Departments */}
+          <div>
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Department Contacts
+            </h2>
+            <div className="space-y-6">
+              {departments.map((dept, index) => (
+                <Card
+                  key={index}
+                  className="bg-white shadow-card hover:shadow-medical transition-all duration-300"
+                >
+                  <CardContent className="p-4">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                        <dept.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-foreground mb-2">
+                          {dept.title}
+                        </h3>
+                        <p className="text-muted-foreground mb-4 leading-relaxed">
+                          {dept.description}
+                        </p>
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2">
+                            <Mail className="w-4 h-4 text-primary" />
+                            <span className="text-sm text-foreground">
+                              {dept.email}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Phone className="w-4 h-4 text-primary" />
+                            <span className="text-sm text-foreground">
+                              {dept.phone}
+                            </span>
                           </div>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              <section className="py-4">
-                <Card className="p-4">
-                  <CardContent className="p-0">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                        <User className="text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold mb-2">
-                          Ready to Partner with Us?
-                        </h3>
-                        <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                          Whether you're a healthcare provider, distributor, or
-                          pharmaceutical partner, we're here to support your
-                          needs with excellence and reliability.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                      <Button
-                        variant="secondary"
-                        size="lg"
-                        className="text-lg px-8"
-                        onClick={() =>
-                          window.open(
-                            "https://calendar.google.com/calendar/u/0/r/eventedit?add=info@peonylifesciences.com",
-                            "_blank"
-                          )
-                        }
-                      >
-                        Schedule a Meeting
-                      </Button>
                     </div>
                   </CardContent>
                 </Card>
-              </section>
+              ))}
             </div>
           </div>
         </div>
