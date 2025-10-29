@@ -17,7 +17,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden min-h-[600px] md:min-h-[700px] flex items-center">
+    <section className="relative overflow-hidden max-h-[70vh] md:max-h-[70vh] flex items-center bg-primary/70">
       {/* Cover Photo Background */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -25,7 +25,7 @@ const HeroSection = () => {
           alt="Pharmaceutical Excellence" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/75"></div>
+        <div className="absolute inset-0 bg-primary/70"></div>
       </div>
 
       {/* Hero Content */}
@@ -33,18 +33,18 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h1
             ref={headlineRef}
-            className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 leading-tight transition-all duration-1000 ${
+            className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight transition-all duration-1000 ${
               headlineVisible ? "animate-fade-in-up" : "opacity-0"
             }`}
           >
             Innovating Healthcare
             <br />
-            <span className="text-primary">Through Scientific Excellence</span>
+            <span className="text-white">Through Scientific Excellence</span>
           </h1>
 
           <p
             ref={subRef}
-            className={`text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed transition-all duration-1000 ${
+            className={`text-base sm:text-lg md:text-xl text-white/80 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed transition-all duration-1000 ${
               subVisible ? "animate-fade-in-up delay-200" : "opacity-0"
             }`}
           >
@@ -54,7 +54,7 @@ const HeroSection = () => {
           </p>
 
           {/* Highlight Badges */}
-          <div
+          {/* <div
             ref={badgesRef}
             className={`flex flex-wrap justify-center gap-3 md:gap-4 mb-6 md:mb-8 transition-all duration-1000 ${
               badgesVisible ? "animate-fade-in-up delay-300" : "opacity-0"
@@ -66,7 +66,7 @@ const HeroSection = () => {
                 <span className="text-sm font-medium text-foreground">{item.text}</span>
               </div>
             ))}
-          </div>
+          </div> */}
 
           <div
             ref={ctaRef}

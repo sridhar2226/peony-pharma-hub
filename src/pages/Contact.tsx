@@ -190,7 +190,7 @@ const Contact = () => {
           <img src={contactHeroBg} alt="Contact Hero" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary/70"></div>
         </div>
-        <div className="container mx-auto px-4 text-center text-white relative z-10">
+        <div className="container mx-auto px-4 my-0 md:my-16 text-center text-white relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Contact Us
           </h1>
@@ -394,6 +394,42 @@ const Contact = () => {
                   </CardContent>
                 </Card>
               ))}
+              <section>
+                <Card className="p-4">
+                  <CardContent className="p-0">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                        <User className="text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold mb-2">
+                          Ready to Partner with Us?
+                        </h3>
+                        <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+                          Whether you're a healthcare provider, distributor, or
+                          pharmaceutical partner, we're here to support your
+                          needs with excellence and reliability.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Button
+                        variant="secondary"
+                        size="lg"
+                        className="text-lg px-8"
+                        onClick={() =>
+                          window.open(
+                            "https://calendar.google.com/calendar/u/0/r/eventedit?add=info@peonylifesciences.com",
+                            "_blank"
+                          )
+                        }
+                      >
+                        Schedule a Meeting
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
             </div>
           </div>
         </div>

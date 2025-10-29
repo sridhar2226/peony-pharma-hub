@@ -41,7 +41,7 @@ const AboutPreview = () => {
     <section ref={ref} className="relative py-10 overflow-hidden">
       {/* Cover Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <img src={aboutBg} alt="About Peony Life Sciences" className="w-full h-full object-cover" />
+        {/* <img src={aboutBg} alt="About Peony Life Sciences" className="w-full h-full object-cover" /> */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/95"></div>
       </div>
       

@@ -61,7 +61,7 @@ const About = () => {
           <img src={aboutHeroBg} alt="About Hero" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary/70"></div>
         </div>
-        <div className="relative z-10 container mx-auto px-4 text-center">
+        <div className="relative z-10 container my-0 md:my-16 mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
             About Peony Life Sciences
           </h1>
@@ -178,7 +178,7 @@ const About = () => {
       </section>
 
       {/* Timeline */}
-      <section className="py-4 pb-8 bg-gradient-subtle">
+      {/* <section className="py-4 pb-8 bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="text-center mb-6">
             <h2 className="text-4xl font-bold text-black mb-2">Our Journey</h2>
@@ -203,7 +203,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* <Footer /> */}
     </div>
