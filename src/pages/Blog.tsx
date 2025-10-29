@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -16,97 +15,10 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import blogHeroBg from "@/assets/blog-hero-bg.jpg";
 
 const Blog = () => {
   const [ref, isVisible] = useScrollAnimation();
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  // 🧠 Neuron Background (identical to About Page)
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d")!;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    const mouse = { x: width / 2, y: height / 2 };
-    const neurons = Array.from({ length: 80 }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      r: Math.random() * 2 + 1,
-      dx: (Math.random() - 0.5) * 0.7,
-      dy: (Math.random() - 0.5) * 0.7,
-    }));
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    };
-
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("resize", handleResize);
-
-    const draw = () => {
-      // 🟢 Background gradient (green adaptive to your theme)
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, "#0b3d2e");
-      gradient.addColorStop(1, "#064e3b");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
-      ctx.shadowBlur = 15;
-      ctx.shadowColor = "rgba(163, 230, 53, 0.7)";
-
-      // 🔆 Draw neurons and links
-      neurons.forEach((n) => {
-        n.x += n.dx;
-        n.y += n.dy;
-
-        // bounce
-        if (n.x < 0 || n.x > width) n.dx *= -1;
-        if (n.y < 0 || n.y > height) n.dy *= -1;
-
-        // neuron dot
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(0, 255, 150, 0.9)";
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = "rgba(0, 255, 150, 0.6)";
-        ctx.fill();
-        // ctx.shadowBlur = 0;
-
-        // connect lines
-        neurons.forEach((m) => {
-          const dx = n.x - m.x;
-          const dy = n.y - m.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            const mouseDist = Math.hypot(mouse.x - n.x, mouse.y - n.y);
-            const intensity = Math.max(0.3, 1 - mouseDist / 400);
-            ctx.strokeStyle = `rgba(0, 255, 150, ${intensity * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(n.x, n.y);
-            ctx.lineTo(m.x, m.y);
-            ctx.stroke();
-          }
-        });
-      });
-
-      requestAnimationFrame(draw);
-    };
-
-    draw();
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   // 📰 Blog Posts Data
   const blogPosts = [
@@ -155,19 +67,16 @@ const Blog = () => {
   const regularPosts = blogPosts.filter((post) => !post.featured);
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen">
       <Header />
 
-      {/* 🧠 Neuron Background */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 -z-10"
-        style={{ background: "linear-gradient(135deg, #003d33, #0f766e)" }}
-      />
-
       {/* Hero Section */}
-      <section className="pt-24 pb-16 relative z-10 text-center text-white">
-        <div className="container mx-auto px-4">
+      <section className="pt-24 pb-16 relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src={blogHeroBg} alt="Blog Hero" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/75"></div>
+        </div>
+        <div className="container mx-auto px-4 text-center text-white relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Insights & Research
           </h1>

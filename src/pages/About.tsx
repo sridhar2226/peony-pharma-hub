@@ -11,110 +11,9 @@ import {
   Globe,
   Microscope,
 } from "lucide-react";
-import { useEffect, useRef } from "react";
+import aboutHeroBg from "@/assets/about-hero-bg.jpg";
 
 const About = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouse = useRef({ x: 0, y: 0 });
-
-  // 🧠 Neural Background Animation
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    const resize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-    window.addEventListener("resize", resize);
-
-    const neuronCount = 90;
-    const neurons = Array.from({ length: neuronCount }).map(() => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      r: 1 + Math.random() * 2,
-      dx: (Math.random() - 0.5) * 0.5,
-      dy: (Math.random() - 0.5) * 0.5,
-    }));
-
-    const draw = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      // 🌿 Gradient Background (green theme)
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, "#0b3d2e");
-      gradient.addColorStop(1, "#064e3b");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
-
-      // Glow settings
-      ctx.shadowBlur = 15;
-      ctx.shadowColor = "rgba(163, 230, 53, 0.7)";
-
-      // Update and draw neurons
-      neurons.forEach((p) => {
-        const dx = mouse.current.x - p.x;
-        const dy = mouse.current.y - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 150) {
-          p.x += dx * 0.01;
-          p.y += dy * 0.01;
-        } else {
-          p.x += p.dx;
-          p.y += p.dy;
-        }
-
-        if (p.x < 0 || p.x > width) p.dx *= -1;
-        if (p.y < 0 || p.y > height) p.dy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(163, 230, 53, 0.9)";
-        ctx.fill();
-      });
-
-      // Connect neurons with lines
-      ctx.shadowBlur = 10;
-      ctx.shadowColor = "rgba(163, 230, 53, 0.5)";
-      for (let i = 0; i < neuronCount; i++) {
-        for (let j = i + 1; j < neuronCount; j++) {
-          const p1 = neurons[i];
-          const p2 = neurons[j];
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
-            ctx.strokeStyle = `rgba(163, 230, 53, ${1 - dist / 100})`;
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      requestAnimationFrame(draw);
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouse.current.x = e.clientX;
-      mouse.current.y = e.clientY;
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    draw();
-
-    return () => {
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
   const values = [
     {
@@ -156,9 +55,12 @@ const About = () => {
     <div className="min-h-screen">
       <Header />
 
-      {/* Hero Section with Neural Background */}
+      {/* Hero Section with Cover Image */}
       <section className="relative pt-24 pb-16 overflow-hidden">
-        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+        <div className="absolute inset-0 z-0">
+          <img src={aboutHeroBg} alt="About Hero" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/70"></div>
+        </div>
         <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
             About Peony Life Sciences

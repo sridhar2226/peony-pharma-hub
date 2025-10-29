@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
 import Header from "@/components/Header";
@@ -20,6 +20,7 @@ import {
   HeadphonesIcon,
   User,
 } from "lucide-react";
+import contactHeroBg from "@/assets/contact-hero-bg.jpg";
 
 // ✅ Types
 interface FormData {
@@ -42,110 +43,6 @@ interface FormErrors {
   message?: string;
 }
 
-// ✅ Neuron Background Component
-const NeuronBackground = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const animationRef = useRef<number>();
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d")!;
-    const particles: {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-    }[] = [];
-    const numParticles = 80;
-    const mouse = { x: 0, y: 0 };
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    for (let i = 0; i < numParticles; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-      });
-    }
-
-    const draw = () => {
-      ctx.fillStyle = "linear-gradient(to right, #0f5132, #145a32)";
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#052e16";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      for (let i = 0; i < numParticles; i++) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-        const dx = p.x - mouse.x;
-        const dy = p.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          p.vx += dx * -0.0004;
-          p.vy += dy * -0.0004;
-        }
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = "#00ff9d";
-        ctx.fill();
-      }
-
-      for (let i = 0; i < numParticles; i++) {
-        for (let j = i + 1; j < numParticles; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
-            const opacity = 1 - dist / 100;
-            ctx.strokeStyle = `rgba(0,255,157,${opacity * 0.5})`;
-            ctx.lineWidth = 0.7;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      animationRef.current = requestAnimationFrame(draw);
-    };
-
-    const mouseMove = (e: MouseEvent) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    };
-    window.addEventListener("mousemove", mouseMove);
-
-    draw();
-
-    return () => {
-      cancelAnimationFrame(animationRef.current!);
-      window.removeEventListener("mousemove", mouseMove);
-      window.removeEventListener("resize", resizeCanvas);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full -z-10"
-    />
-  );
-};
 
 // ✅ Contact Component
 const Contact = () => {
@@ -285,12 +182,15 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <NeuronBackground />
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-24 pb-16 text-center text-white relative z-10">
-        <div className="container mx-auto px-4">
+      <section className="pt-24 pb-16 relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src={contactHeroBg} alt="Contact Hero" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/70"></div>
+        </div>
+        <div className="container mx-auto px-4 text-center text-white relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Contact Us
           </h1>

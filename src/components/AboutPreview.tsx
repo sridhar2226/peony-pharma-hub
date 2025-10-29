@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Target, Eye, Heart, Users, Building, Award } from "lucide-react";
 import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 import { useNavigate } from "react-router-dom";
+import aboutBg from "@/assets/about-preview-bg.jpg";
 
 const AboutPreview = () => {
   const [ref, isVisible] = useScrollAnimation();
@@ -37,8 +38,14 @@ const AboutPreview = () => {
   ];
 
   return (
-    <section ref={ref} className="py-10 bg-gradient-subtle">
-      <div className="container mx-auto px-4">
+    <section ref={ref} className="relative py-10 overflow-hidden">
+      {/* Cover Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img src={aboutBg} alt="About Peony Life Sciences" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/95"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className={`text-center mb-4 transition-all duration-1000 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">

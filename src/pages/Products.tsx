@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Search, Filter, Pill, Syringe, Heart, Shield, Star, ShoppingCart } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import productsHeroBg from "@/assets/products-hero-bg.jpg";
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -113,8 +114,11 @@ const Products = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-accent/90"></div>
+      <section className="pt-24 pb-16 relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src={productsHeroBg} alt="Products Hero" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/75"></div>
+        </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">

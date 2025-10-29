@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Shield, CheckCircle, Award, FileCheck, Microscope, Users, Globe, Lock } from "lucide-react";
+import qualityHeroBg from "@/assets/quality-hero-bg.jpg";
 
 const Quality = () => {
   const certifications = [
@@ -104,8 +105,12 @@ const Quality = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-hero">
-        <div className="container mx-auto px-4 text-center">
+      <section className="pt-24 pb-16 relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src={qualityHeroBg} alt="Quality Hero" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/70"></div>
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
             Quality Assurance
           </h1>
