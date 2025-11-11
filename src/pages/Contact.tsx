@@ -60,7 +60,7 @@ const Contact = () => {
   });
   const [errors, setErrors] = useState<FormErrors>({});
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
   const phoneRegex = /^[0-9]{10}$/;
   const alphabetsRegex = /^[a-zA-Z\s]+$/;
 
