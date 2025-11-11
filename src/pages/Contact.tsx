@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
 import {
   MapPin,
   Phone,
@@ -47,6 +48,7 @@ interface FormErrors {
 // ✅ Contact Component
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
+  const { toast } = useToast();
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -60,16 +62,98 @@ const Contact = () => {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^[0-9]{10}$/;
+  const alphabetsRegex = /^[a-zA-Z\s]+$/;
 
   const validate = (name: keyof FormData, value: string) => {
     let error = "";
-    if (name === "firstName" && value.trim().length < 2)
-      error = "First name must be at least 2 characters";
-    else if (name === "email" && !emailRegex.test(value))
-      error = "Enter a valid email address";
-    else if (name === "phone" && value && !phoneRegex.test(value))
-      error = "Phone number must be 10 digits";
+    
+    switch (name) {
+      case "firstName":
+        if (!value.trim()) {
+          error = "First name is required";
+        } else if (value.trim().length < 2) {
+          error = "First name must be at least 2 characters";
+        } else if (!alphabetsRegex.test(value)) {
+          error = "First name must contain only alphabets";
+        }
+        break;
+      
+      case "lastName":
+        if (!value.trim()) {
+          error = "Last name is required";
+        } else if (value.trim().length < 2) {
+          error = "Last name must be at least 2 characters";
+        } else if (!alphabetsRegex.test(value)) {
+          error = "Last name must contain only alphabets";
+        }
+        break;
+      
+      case "email":
+        if (!value.trim()) {
+          error = "Email is required";
+        } else if (!emailRegex.test(value)) {
+          error = "Enter a valid email address";
+        }
+        break;
+      
+      case "company":
+        if (value.length > 100) {
+          error = "Company name must be less than 100 characters";
+        }
+        break;
+      
+      case "phone":
+        if (value && !phoneRegex.test(value)) {
+          error = "Phone number must be exactly 10 digits";
+        }
+        break;
+      
+      case "subject":
+        if (!value.trim()) {
+          error = "Subject is required";
+        } else if (value.trim().length < 3) {
+          error = "Subject must be at least 3 characters";
+        } else if (value.length > 150) {
+          error = "Subject must be less than 150 characters";
+        }
+        break;
+      
+      case "message":
+        if (!value.trim()) {
+          error = "Message is required";
+        } else if (value.trim().length < 5) {
+          error = "Message must be at least 5 characters";
+        } else if (value.length > 1000) {
+          error = "Message must be less than 1000 characters";
+        }
+        break;
+    }
+    
     setErrors((prev) => ({ ...prev, [name]: error }));
+    return error;
+  };
+
+  const validateForm = (): { isValid: boolean; errors: FormErrors } => {
+    const newErrors: FormErrors = {};
+    
+    // Validate all required fields
+    newErrors.firstName = validate("firstName", formData.firstName) || undefined;
+    newErrors.lastName = validate("lastName", formData.lastName) || undefined;
+    newErrors.email = validate("email", formData.email) || undefined;
+    newErrors.company = validate("company", formData.company) || undefined;
+    newErrors.phone = validate("phone", formData.phone) || undefined;
+    newErrors.subject = validate("subject", formData.subject) || undefined;
+    newErrors.message = validate("message", formData.message) || undefined;
+    
+    // Remove undefined errors
+    Object.keys(newErrors).forEach((key) => {
+      if (!newErrors[key as keyof FormErrors]) {
+        delete newErrors[key as keyof FormErrors];
+      }
+    });
+    
+    const isValid = Object.keys(newErrors).length === 0;
+    return { isValid, errors: newErrors };
   };
 
   const handleChange = (
@@ -86,14 +170,22 @@ const Contact = () => {
     }
   };
 
+  const handleBlur = (name: keyof FormData) => {
+    validate(name, formData[name]);
+  };
+
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    Object.keys(formData).forEach((key) =>
-      validate(key as keyof FormData, formData[key as keyof FormData])
-    );
-    const hasError = Object.values(errors).some((err) => err);
-    if (hasError) {
-      alert("Please correct errors before submitting.");
+    
+    const { isValid, errors: validationErrors } = validateForm();
+    
+    if (!isValid) {
+      setErrors(validationErrors);
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: "Please correct all errors before submitting.",
+      });
       return;
     }
 
@@ -106,7 +198,11 @@ const Contact = () => {
       )
       .then(
         () => {
-          alert("✅ Message sent successfully!");
+          toast({
+            title: "Success!",
+            description: "Your message has been sent successfully. We'll get back to you soon.",
+            className: "bg-green-50 border-green-200",
+          });
           formRef.current?.reset();
           setFormData({
             firstName: "",
@@ -121,7 +217,11 @@ const Contact = () => {
         },
         (error) => {
           console.error("❌ Failed:", error.text);
-          alert("Something went wrong. Please try again.");
+          toast({
+            variant: "destructive",
+            title: "Error",
+            description: "Something went wrong. Please try again.",
+          });
         }
       );
   };
@@ -258,6 +358,8 @@ const Contact = () => {
                         placeholder="Enter your first name"
                         value={formData.firstName}
                         onChange={handleChange}
+                        onBlur={() => handleBlur("firstName")}
+                        className={errors.firstName ? "border-red-500 focus-visible:ring-red-500" : ""}
                         required
                       />
                       {errors.firstName && (
@@ -272,8 +374,13 @@ const Contact = () => {
                         placeholder="Enter your last name"
                         value={formData.lastName}
                         onChange={handleChange}
+                        onBlur={() => handleBlur("lastName")}
+                        className={errors.lastName ? "border-red-500 focus-visible:ring-red-500" : ""}
                         required
                       />
+                      {errors.lastName && (
+                        <p className="text-red-500 text-sm">{errors.lastName}</p>
+                      )}
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -285,6 +392,8 @@ const Contact = () => {
                       placeholder="Enter your email address"
                       value={formData.email}
                       onChange={handleChange}
+                      onBlur={() => handleBlur("email")}
+                      className={errors.email ? "border-red-500 focus-visible:ring-red-500" : ""}
                       required
                     />
                     {errors.email && (
@@ -299,7 +408,12 @@ const Contact = () => {
                       placeholder="Enter your company name"
                       value={formData.company}
                       onChange={handleChange}
+                      onBlur={() => handleBlur("company")}
+                      className={errors.company ? "border-red-500 focus-visible:ring-red-500" : ""}
                     />
+                    {errors.company && (
+                      <p className="text-red-500 text-sm">{errors.company}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
@@ -311,6 +425,8 @@ const Contact = () => {
                       placeholder="Enter 10-digit phone"
                       value={formData.phone}
                       onChange={handleChange}
+                      onBlur={() => handleBlur("phone")}
+                      className={errors.phone ? "border-red-500 focus-visible:ring-red-500" : ""}
                     />
                     {errors.phone && (
                       <p className="text-red-500 text-sm">{errors.phone}</p>
@@ -324,8 +440,13 @@ const Contact = () => {
                       placeholder="Enter subject"
                       value={formData.subject}
                       onChange={handleChange}
+                      onBlur={() => handleBlur("subject")}
+                      className={errors.subject ? "border-red-500 focus-visible:ring-red-500" : ""}
                       required
                     />
+                    {errors.subject && (
+                      <p className="text-red-500 text-sm">{errors.subject}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="message">Message *</Label>
@@ -335,8 +456,13 @@ const Contact = () => {
                       placeholder="Enter your message..."
                       value={formData.message}
                       onChange={handleChange}
+                      onBlur={() => handleBlur("message")}
+                      className={errors.message ? "border-red-500 focus-visible:ring-red-500" : ""}
                       required
                     />
+                    {errors.message && (
+                      <p className="text-red-500 text-sm">{errors.message}</p>
+                    )}
                   </div>
                   <Button
                     type="submit"
