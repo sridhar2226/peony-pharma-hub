@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FounderSection from "@/components/FounderSection";
 import { Button } from "@/components/ui/button";
 import {
   Target,
@@ -20,26 +21,26 @@ const About = () => {
       icon: Target,
       title: "Mission",
       description:
-        "To improve global health outcomes through innovative pharmaceutical solutions and unwavering commitment to quality.",
+        "To make high-quality medicines accessible, affordable, and trusted by every community in India.",
     },
     {
       icon: Eye,
       title: "Vision",
       description:
-        "To be the world's most trusted pharmaceutical partner, advancing healthcare through scientific excellence.",
+        "To become India's most dependable, tech-forward healthcare brand across pharma, wellness, nutrition, and pain-relief.",
     },
     {
       icon: Heart,
       title: "Values",
       description:
-        "Integrity, innovation, and patient-centricity guide every decision we make in our pursuit of healthcare excellence.",
+        "Integrity: Trust first, business next. Quality: Every batch matters. Care: Built for real people, real lives. Innovation: Bringing modern science to everyday wellness. Service: Supporting pharmacies & partners for decades.",
     },
   ];
 
   const achievements = [
-    { icon: Users, number: "500K+", label: "Patients Served" },
-    { icon: Building, number: "50+", label: "Countries" },
-    { icon: Award, number: "25+", label: "Years Experience" },
+    { icon: Award, number: "35+", label: "Years of Excellence" },
+    { icon: Building, number: "1,000+", label: "Pharmacy Partners" },
+    { icon: Users, number: "20+", label: "Districts Covered" },
   ];
 
   const milestones = [
@@ -63,12 +64,10 @@ const About = () => {
         </div>
         <div className="relative z-10 container my-0 md:my-16 mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            About Peony Life Sciences
+            Built on Trust. Powered by Science.
           </h1>
           <p className="text-xl text-white/90 max-w-3xl mx-auto">
-            Pioneering pharmaceutical excellence since 1999, we combine
-            cutting-edge research with world-class manufacturing to deliver
-            life-changing medicines worldwide.
+            Peony Life Sciences is a next-generation healthcare and wellness company rooted in a 35-year legacy of pharmaceutical distribution through its Gadinee Healthcare & Solai Pharma divisions.
           </p>
         </div>
       </section>
@@ -79,19 +78,19 @@ const About = () => {
           <div className="grid md:grid-cols-2 p-4 gap-6 items-center">
             <div className="px-4">
               <h2 className="text-4xl font-bold text-black mb-6">
-                NOW YOUR HEALTH IS YOURS
+                Founded in 1992
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Peony Life Sciences is a leading pharmaceutical supply chain
-                company dedicated to benefiting customers, the public, and
-                distributors. We specialize in providing high-quality medical
-                supplies and pharmaceutical solutions to healthcare providers
-                worldwide.
+                Peony has grown into one of Tamil Nadu's most respected healthcare networks, supplying high-quality, and affordable medicines to over 1,000 pharmacies across 20+ districts.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                With over 70+ products in our portfolio, including veterinary
-                medicines, we ensure secure inventory management and 24/7
-                customer service support to meet all your pharmaceutical needs.
+                Today, Peony combines scientific formulation, clean manufacturing, distribution excellence, modern branding, and tech innovation to build a healthcare ecosystem made for India's growing needs.
+              </p>
+              <p className="text-lg text-muted-foreground mt-6 font-semibold">
+                Our Philosophy: Powering Everyday Champions
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                We create products for the people who keep India moving - workers, athletes, mothers, fathers, and elders who push through pain and never stop.
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -205,7 +204,9 @@ const About = () => {
         </div>
       </section> */}
 
-      {/* <Footer /> */}
+      <FounderSection />
+
+      <Footer />
     </div>
   );
 };

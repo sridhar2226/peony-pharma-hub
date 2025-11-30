@@ -1,9 +1,9 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import AboutPreview from "@/components/AboutPreview";
-// import ProductSection from "@/components/ProductSection";
-// import ShopSection from "@/components/ShopSection";
-// import ResearchQuality from "@/components/ResearchQuality";
+import ProductDivisions from "@/components/ProductDivisions";
+import PeofenacSection from "@/components/PeofenacSection";
+import PartnerSection from "@/components/PartnerSection";
 import Footer from "@/components/Footer";
 import '../App.css'
 
@@ -14,9 +14,9 @@ const Index = () => {
       <main className="mt-16 main-conatiner">
         <HeroSection />
         <AboutPreview />
-        {/* <ProductSection /> */}
-        {/* <ShopSection /> */}
-        {/* <ResearchQuality /> */}
+        <PeofenacSection />
+        <ProductDivisions />
+        <PartnerSection />
       </main>
       <Footer />
     </div>
