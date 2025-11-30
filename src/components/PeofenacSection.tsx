@@ -41,7 +41,7 @@ const PeofenacSection = () => {
               variant="secondary"
               size="lg"
               className="text-lg px-8 py-4 group"
-              onClick={() => window.open("https://preview--product-lane-shop.lovable.app/", "_blank")}
+              onClick={() => window.open("https://healthkart-online.lovable.app/", "_blank")}
             >
               Shop Peofenac
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

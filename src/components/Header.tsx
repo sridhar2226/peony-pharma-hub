@@ -123,7 +123,7 @@ const Header = () => {
                       <Phone className="w-4 h-4 mr-2" />
                       Contact Us
                     </Button> */}
-                    <Button variant="medical" className="w-full" onClick={() => window.open('https://preview--product-lane-shop.lovable.app/', '_blank')}>
+                    <Button variant="medical" className="w-full" onClick={() => window.open('https://healthkart-online.lovable.app/', '_blank')}>
                       <ShoppingCart className="w-4 h-4 mr-2" />
                       Order Online
                     </Button>
