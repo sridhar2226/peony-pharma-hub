@@ -122,11 +122,10 @@ const Products = () => {
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Premium Products
+              Our Product Range
             </h1>
             <p className="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto mb-12 leading-relaxed">
-              More than 70+ pharmaceutical products & veterinary medicines available. 
-              Quality assured and internationally certified.
+              100+ Essential Medicines & Wellness Products: Pain relief, antibiotics, multivitamins, nutrition, paediatric care, veterinary medicines, and more.
             </p>
             <div className="max-w-md mx-auto relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/80 w-5 h-5" />
@@ -240,17 +239,17 @@ const Products = () => {
       <section className="py-16 bg-primary">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
-            Need Help Finding the Right Product?
+            Partner With Peony Life Sciences
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Our pharmaceutical experts are here to help you find the perfect solution for your needs.
+            Whether you're a pharma distributor, pharmacy retailer, hospital, health brand, or gym chain - join our 35-year healthcare network with deep roots and modern ambitions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="secondary" size="lg" className="text-lg px-8">
-              Contact Our Team
+            <Button variant="secondary" size="lg" className="text-lg px-8" onClick={() => window.location.href = '/contact'}>
+              Become a Partner
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 border-white text-white hover:bg-white hover:text-primary">
-              Download Catalog
+            <Button variant="outline" size="lg" className="text-lg px-8 border-white text-white hover:bg-white hover:text-primary" onClick={() => window.open('https://preview--product-lane-shop.lovable.app/', '_blank')}>
+              Shop Now
             </Button>
           </div>
         </div>

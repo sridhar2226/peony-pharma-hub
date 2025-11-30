@@ -37,9 +37,9 @@ const HeroSection = () => {
               headlineVisible ? "animate-fade-in-up" : "opacity-0"
             }`}
           >
-            Innovating Healthcare
+            Faster. Safer. Smarter.
             <br />
-            <span className="text-white">Through Scientific Excellence</span>
+            <span className="text-white">Powering Everyday Champions.</span>
           </h1>
 
           <p
@@ -48,9 +48,7 @@ const HeroSection = () => {
               subVisible ? "animate-fade-in-up delay-200" : "opacity-0"
             }`}
           >
-            Leading pharmaceutical innovation with world-class quality standards,
-            delivering life-saving medicines to patients globally through
-            cutting-edge research and manufacturing excellence.
+            For 35 years, Peony has delivered trusted medicines, wellness products, and pain-relief solutions to over 1,000+ pharmacies across India. A brand built on science, service, and the strength of everyday champions.
           </p>
 
           {/* Highlight Badges */}

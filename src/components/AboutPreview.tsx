@@ -16,25 +16,25 @@ const AboutPreview = () => {
   const values = [
     {
       icon: Target,
-      title: "Mission",
-      description: "To improve global health outcomes through innovative pharmaceutical solutions and unwavering commitment to quality."
+      title: "Science-Backed Formulations",
+      description: "All products are created with clinically validated ingredients and manufactured by certified, compliant facilities."
     },
     {
       icon: Eye,
-      title: "Vision",
-      description: "To be the world's most trusted pharmaceutical partner, advancing healthcare through scientific excellence."
+      title: "100+ Essential Medicines",
+      description: "Pain relief, antibiotics, multivitamins, nutrition, paediatric care, veterinary medicines, and more."
     },
     {
       icon: Heart,
-      title: "Values",
-      description: "Integrity, innovation, and patient-centricity guide every decision we make in our pursuit of healthcare excellence."
+      title: "Strongest Distribution Network",
+      description: "20+ districts in Tamil Nadu, 1,000+ retail and wholesale pharmacy partners across India."
     }
   ];
 
   const achievements = [
-    { icon: Users, number: "500K+", label: "Patients Served" },
-    { icon: Building, number: "50+", label: "Countries" },
-    { icon: Award, number: "25+", label: "Years Experience" }
+    { icon: Award, number: "35+", label: "Years of Excellence" },
+    { icon: Building, number: "1,000+", label: "Pharmacy Partners" },
+    { icon: Users, number: "20+", label: "Districts Covered" }
   ];
 
   return (
@@ -49,11 +49,10 @@ const AboutPreview = () => {
         {/* Section Header */}
         <div className={`text-center mb-4 transition-all duration-1000 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            About Peony Life Sciences
+            WHY PEONY?
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Pioneering pharmaceutical excellence since 1999, we combine cutting-edge research 
-            with world-class manufacturing to deliver life-changing medicines worldwide.
+            Built on Trust. Powered by Science. A 35-year legacy of healthcare excellence.
           </p>
         </div>
 
