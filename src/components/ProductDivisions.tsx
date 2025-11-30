@@ -49,7 +49,7 @@ const ProductDivisions = () => {
           ))}
         </div>
 
-        <div className="text-center">
+        {/* <div className="text-center">
           <Button 
             variant="medical" 
             size="lg" 
@@ -58,7 +58,7 @@ const ProductDivisions = () => {
           >
             View All Products
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
