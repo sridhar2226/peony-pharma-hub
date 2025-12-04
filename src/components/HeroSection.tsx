@@ -76,12 +76,7 @@ const HeroSection = () => {
               variant="secondary"
               size="lg"
               className="text-base md:text-lg px-6 md:px-8 py-4 md:py-6 min-w-[180px] md:min-w-[200px] group"
-              onClick={() =>
-                window.open(
-                  "https://healthkart-online.lovable.app/",
-                  "_blank"
-                )
-              }
+              onClick={() => window.open("https://shop.peonylifesciences.com/", "_blank")}
             >
               Order Now
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

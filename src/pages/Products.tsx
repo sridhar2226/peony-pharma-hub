@@ -214,7 +214,7 @@ const Products = () => {
                       size="sm"
                       disabled={!product.inStock}
                       className="flex items-center gap-2"
-                      onClick={() => window.open('https://healthkart-online.lovable.app/', '_blank')}
+                      onClick={() => window.open('https://shop.peonylifesciences.com/', '_blank')}
                     >
                       <ShoppingCart className="w-4 h-4" />
                       {product.inStock ? "Add to Cart" : "Unavailable"}
@@ -248,7 +248,7 @@ const Products = () => {
             <Button variant="secondary" size="lg" className="text-lg px-8" onClick={() => window.location.href = '/contact'}>
               Become a Partner
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 border-white text-white hover:bg-white hover:text-primary" onClick={() => window.open('https://healthkart-online.lovable.app/', '_blank')}>
+            <Button variant="outline" size="lg" className="text-lg px-8 border-white text-white hover:bg-white hover:text-primary" onClick={() => window.open('https://shop.peonylifesciences.com/', '_blank')}>
               Shop Now
             </Button>
           </div>
