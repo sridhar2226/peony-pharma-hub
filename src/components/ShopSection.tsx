@@ -144,7 +144,7 @@ const ShopSection = () => {
                         variant="medical" 
                         size="sm"
                         className="flex-1 flex items-center gap-2"
-                        onClick={() => window.open('https://healthkart-online.lovable.app/', '_blank')}
+                        onClick={() => window.open('https://shop.peonylifesciences.com/', '_blank')}
                       >
                         Buy Now
                       </Button>
@@ -172,10 +172,10 @@ const ShopSection = () => {
               Browse our complete catalog, add products to cart, and enjoy seamless checkout experience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="secondary" size="lg" className="text-lg px-8 py-4" onClick={() => window.open('https://healthkart-online.lovable.app/', '_blank')}>
+              <Button variant="secondary" size="lg" className="text-lg px-8 py-4" onClick={() => window.open('https://shop.peonylifesciences.com/', '_blank')}>
                 Browse All Products
               </Button>
-              <Button variant="hero" size="lg" className="text-lg px-8 py-4" onClick={() => window.open('https://healthkart-online.lovable.app/', '_blank')}>
+              <Button variant="hero" size="lg" className="text-lg px-8 py-4" onClick={() => window.open('https://shop.peonylifesciences.com/', '_blank')}>
                 Start Shopping
               </Button>
             </div>
