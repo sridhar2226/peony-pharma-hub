@@ -82,9 +82,7 @@ const Header = () => {
             <Button
               variant="medical"
               size="sm"
-              onClick={() => {
-                naviagte("/shop");
-              }}
+              onClick={() => window.open('https://shop.peonylifesciences.com', '_blank')}
             >
               <ShoppingCart className="w-4 h-4" />
             </Button>
@@ -123,7 +121,7 @@ const Header = () => {
                       <Phone className="w-4 h-4 mr-2" />
                       Contact Us
                     </Button> */}
-                    <Button variant="medical" className="w-full" onClick={() => window.open('https://healthkart-online.lovable.app/', '_blank')}>
+                    <Button variant="medical" className="w-full" onClick={() => window.open('https://shop.peonylifesciences.com', '_blank')}>
                       <ShoppingCart className="w-4 h-4 mr-2" />
                       Order Online
                     </Button>
