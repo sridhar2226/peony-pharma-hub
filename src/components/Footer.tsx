@@ -39,7 +39,7 @@ const Footer = () => {
     { icon: Facebook, label: "Facebook", url: "#" },
     { icon: Twitter, label: "Twitter", url: "#" },
     { icon: Instagram, label: "Instagram", url: "https://www.instagram.com/peonylifesciences?igsh=MWJ4ZXhmMmc2eTJu" },
-        { icon: Youtube, label: "Youtube", url: "https://www.youtube.com/@peonylifesciences3585" }
+    { icon: Youtube, label: "Youtube", url: "https://www.youtube.com/@peonylifesciences3585" }
   ];
 
   const validateEmail = (email: string) => {
@@ -218,11 +218,14 @@ const Footer = () => {
                 <li key={index}>
                   <Link
                     to={link.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-white/80 hover:text-white transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
                 </li>
+
               ))}
             </ul>
 
