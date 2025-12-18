@@ -31,10 +31,7 @@ const Footer = () => {
 
   // Legal links data
   const legalLinks = [
-    { label: "Terms & Conditions", path: "/terms" },
-    { label: "Privacy Policy", path: "/privacy" },
-    { label: "Cookie Policy", path: "/cookies" },
-    { label: "Regulatory", path: "/regulatory" },
+    { label: "Terms & Conditions", path: "https://terms.peonylifesciences.com/" }
   ];
 
   // Social media links data
