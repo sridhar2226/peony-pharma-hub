@@ -52,7 +52,7 @@ const AboutPreview = () => {
         </div>
 
         {/* Mission, Vision, Values */}
-        <div ref={valuesRef} className="grid md:grid-cols-3 gap-8 mb-4">
+        <div ref={valuesRef} className="d-flex gap-8 mb-4">
           {values.map((item, index) => (
             <div key={index} className={`group bg-gradient-card rounded-xl p-8 shadow-card hover:shadow-luxury transition-all duration-500 transform hover:scale-105 ${visibleValues.includes(index) ? 'animate-scale-in' : 'opacity-0'}`}>
               <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mb-6 group-hover:shadow-glow transition-all duration-300">
