@@ -20,11 +20,6 @@ const AboutPreview = () => {
       description: "All products are created with clinically validated ingredients and manufactured by certified, compliant facilities."
     },
     {
-      icon: Eye,
-      title: "100+ Essential Medicines",
-      description: "Pain relief, antibiotics, multivitamins, nutrition, paediatric care, veterinary medicines, and more."
-    },
-    {
       icon: Heart,
       title: "Strongest Distribution Network",
       description: "20+ districts in Tamil Nadu, 1,000+ retail and wholesale pharmacy partners across India."
